@@ -1,7 +1,5 @@
 """
-build_dataset.py
-----------------
-Joins the project's raw data sources into one analysis-ready table.
+joined dataset so that the project's raw data sources into one analysis-ready table.
 
 Sources (relative to the Research/ folder):
   1. Epoch AI       Model_Data/ai_models/notable_ai_models.csv      (specs: params, FLOP, training power, country, date)
@@ -29,10 +27,8 @@ from pathlib import Path
 
 import pandas as pd
 
-# ----------------------------------------------------------------------------
-# Paths — script lives in Research/scripts/, so the Research/ root is its parent.
-# ----------------------------------------------------------------------------
-ROOT = Path(__file__).resolve().parent.parent          # .../Research
+#reproducible path
+ROOT = Path(__file__).resolve().parent.parent
 EPOCH_CSV = ROOT / "Model_Data" / "ai_models" / "notable_ai_models.csv"
 AA_JSON = ROOT / "Model_Data" / "artificial_analysis.json"
 MLENERGY_JSON = ROOT / "Energy_Consumption_Data" / "ml_energy_leaderboard.json"
@@ -43,22 +39,18 @@ OUT_CSV = OUT_DIR / "master_models.csv"
 OUT_REPORT = OUT_DIR / "join_report.txt"
 
 
-# ----------------------------------------------------------------------------
-# Name normalization — the heart of the join.
-# ----------------------------------------------------------------------------
+#ensure that all names are the same across datasets
 def norm(name) -> str:
     """Lowercase, drop parenthetical qualifiers, strip non-alphanumerics."""
     if not isinstance(name, str):
         return ""
     s = name.lower()
-    s = re.sub(r"\(.*?\)", "", s)          # drop "(low)", "(max)", "(shared)" etc.
-    s = re.sub(r"[^a-z0-9]", "", s)        # keep only letters+digits
+    s = re.sub(r"\(.*?\)", "", s)         
+    s = re.sub(r"[^a-z0-9]", "", s)        
     return s.strip()
 
 
-# ----------------------------------------------------------------------------
-# Loaders — each returns a tidy DataFrame with a "key" column for joining.
-# ----------------------------------------------------------------------------
+#choosing epoch dataset as the start, changes feature names
 def load_epoch() -> pd.DataFrame:
     df = pd.read_csv(EPOCH_CSV)
     keep = {
@@ -76,7 +68,7 @@ def load_epoch() -> pd.DataFrame:
     df["key"] = df["model_name"].map(norm)
     return df
 
-
+#converting json into dataframe
 def load_artificial_analysis() -> pd.DataFrame:
     data = json.load(open(AA_JSON))["data"]
     rows = []
@@ -101,14 +93,12 @@ def load_artificial_analysis() -> pd.DataFrame:
             "key": norm(m.get("name")),
         })
     df = pd.DataFrame(rows)
-    # one model can appear as several endpoints (low/high/max) -> keep cheapest output price
+    # selecting cheapest option for each model
     df = df.sort_values("price_1m_output").drop_duplicates("key", keep="first")
     return df
 
-
+#converting json data to dataframe
 def load_mlenergy() -> pd.DataFrame:
-    """Model params/precision from the catalog, plus measured energy_wh_per_1k
-    if scripts/fetch_mlenergy_energy.py has been run (it writes the energy CSV)."""
     blob = json.load(open(MLENERGY_JSON))
     rows = []
     for repo, m in blob.get("models", {}).items():
@@ -118,20 +108,12 @@ def load_mlenergy() -> pd.DataFrame:
             "mle_total_params_b": m.get("total_params_billions"),
             "mle_active_params_b": m.get("activated_params_billions"),
             "mle_precision": m.get("weight_precision"),
+            # NOTE: measured energy-per-task is NOT in this index file. It lives in
+            # per-task files (ml.energy/leaderboard/data/<task>.json). Add a loader
+            # here once those are downloaded, then merge an energy_wh_per_1k column.
             "key": norm(m.get("nickname")),
         })
-    df = pd.DataFrame(rows).drop_duplicates("key", keep="first")
-
-    # Merge measured energy if the fetch script has produced it.
-    energy_csv = OUT_DIR / "mlenergy_energy_by_model.csv"
-    if energy_csv.exists():
-        e = pd.read_csv(energy_csv)
-        e["key"] = e["nickname"].map(norm)
-        e = e[["key", "energy_wh_per_1k", "energy_wh_per_1k_min",
-               "energy_wh_per_1k_max", "gpus", "source_quality"]]
-        e = e.rename(columns={"source_quality": "energy_source_quality"})
-        df = df.merge(e.drop_duplicates("key"), on="key", how="left")
-    return df
+    return pd.DataFrame(rows).drop_duplicates("key", keep="first")
 
 
 def load_lifearchitect() -> pd.DataFrame:
@@ -157,9 +139,7 @@ def load_lifearchitect() -> pd.DataFrame:
     return df[df["key"] != ""].drop_duplicates("key", keep="first")
 
 
-# ----------------------------------------------------------------------------
-# Build
-# ----------------------------------------------------------------------------
+#builds the joint dataset
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -168,7 +148,7 @@ def main() -> None:
     mle = load_mlenergy()
     la = load_lifearchitect()
 
-    # Left-join everything onto the Epoch backbone so no Epoch model is lost.
+    # Left-join everything onto epoch
     master = (
         epoch
         .merge(aa.drop(columns=["aa_name"]), on="key", how="left")
@@ -179,7 +159,7 @@ def main() -> None:
     master = master.sort_values("model_name").reset_index(drop=True)
     master.to_csv(OUT_CSV, index=False)
 
-    # ---- join report -------------------------------------------------------
+    #join report so null values have distinctive column
     def matched(col):
         return int(master[col].notna().sum()) if col in master else 0
 

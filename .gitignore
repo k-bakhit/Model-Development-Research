@@ -20,7 +20,5 @@ env/
 .vscode/
 
 # ---- Large / regenerable data outputs ----
-# Raw API dumps and archives are large and reproducible from scripts.
-# Comment these out if you DO want to version the data.
-artificial_analysis.json
+# artificial_analysis.json IS versioned (it's source data we want in the repo).
 *.zip

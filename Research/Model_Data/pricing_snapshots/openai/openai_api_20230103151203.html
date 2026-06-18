@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<!--
+
+
+           .d88888b.             
+         .8P"     "9bd888b.      
+        .8P     .d8P"   `"988.   
+     .8888   .d8P"    ,     98.  
+   .8P" 88   8"    .d98b.    88  
+  .8P   88   8 .d8P"   "98b. 88  
+  88    88   8P"  `"8b.    "98.  
+  88.   88   8       8"8b.    88 
+   88    "98.8       8   88   "88
+    `8b.    "98.,  .d8   88    88
+    88 "98b.   .d8P" 8   88   d8"
+    88    "98bP"    .8   88 .d8" 
+    "8b     `    .d8P"   8888"   
+     "88b.,   .d8P"     d8"      
+       "9888P98b.     .d8"       
+               "988888P"         
+
+
+  Solve Impossible Problems
+  openai.com/careers
+
+
+-->
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-71156606-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-71156606-1');
+  </script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Pricing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" type="text/css" href="https://openai.com/assets/styles/all.css?v=b4ca92bb18" />
+  <style>:root { --bg: 247, 247, 248;}.accordion ul { padding-left: var(--indent);}#oldEmbeddingPricingToggle { cursor: pointer;}</style>
+
+  <script type="text/javascript">document.documentElement.className = 'js';</script>
+  <link rel="icon" type="image/svg+xml" href="https://openai.com/assets/images/favicon.svg?v=b4ca92bb18">
+  <link rel="mask-icon" href="https://openai.com/assets/images/mask-icon.svg?v=b4ca92bb18" color="#000000">
+  <link rel="icon" href="https://openai.com/content/images/size/w256h256/2020/09/icon-1.png" type="image/png" />
+    <link rel="canonical" href="https://openai.com/api/pricing/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="OpenAI" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pricing" />
+    <meta property="og:description" content="OpenAI is an AI research and deployment company. Our mission is to ensure that artificial general intelligence benefits all of humanity." />
+    <meta property="og:url" content="https://openai.com/api/pricing/" />
+    <meta property="og:image" content="https://openai.com/content/images/2022/05/twitter-1.png" />
+    <meta property="article:modified_time" content="2021-11-12T21:35:19.000Z" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/openai.research" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pricing" />
+    <meta name="twitter:description" content="OpenAI is an AI research and deployment company. Our mission is to ensure that artificial general intelligence benefits all of humanity." />
+    <meta name="twitter:url" content="https://openai.com/api/pricing/" />
+    <meta name="twitter:image" content="https://openai.com/content/images/2022/05/twitter-1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="OpenAI" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="" />
+    <meta name="twitter:site" content="@openai" />
+    <meta property="og:image:width" content="3200" />
+    <meta property="og:image:height" content="1800" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "OpenAI",
+        "url": "https://openai.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://openai.com/content/images/2022/05/openai-avatar.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "OpenAI",
+        "sameAs": []
+    },
+    "headline": "Pricing",
+    "url": "https://openai.com/api/pricing/",
+    "dateModified": "2021-11-12T21:35:19.000Z",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://openai.com/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.26" />
+    <link rel="alternate" type="application/rss+xml" title="OpenAI" href="https://openai.com/blog/rss/" />
+    
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="23f7e2ddba37b787ce1ea90e77" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://openaidev.ghost.io/" crossorigin="anonymous"></script>
+    <script defer src="/public/cards.min.js?v=b4ca92bb18"></script><style>:root {--ghost-accent-color: #15171A;}</style>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=b4ca92bb18">
+</head>
+<body>
+  
+<header class="bg-white">
+  <nav class="nav" data-url="/api-pricing/">
+  <div class="bg-black color-white pt-0.2 pb-1/6 text-center d-block no-style">
+    <div class="container d-flex flex-row justify-content-center small-copy">
+      <span class="d-none d-md-block">Introducing ChatGPT research release</span>
+
+      <div class="flex ml-md-0.5">
+        <a href="https://chat.openai.com" class="icon-external font-bold right">Try<span class="d-md-none">&nbsp;ChatGPT</span></a>
+        <a href="/blog/chatgpt/" class="icon-next font-bold right ml-0.25">Learn more</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="nav-row row align-items-start align-items-sm-center">
+      <div class="col-6 col-sm nav-symbol-wrap">
+        <a href="/" class="nav-symbol"><!-- contact comms-team@openai.com for official logo asset; below is hinted version --><svg id="openai-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 29.53"><path d="M40.7,6.98s-.05,0-.07,0c-.02,0-.05,0-.07,0-4.67,0-7.58,2.91-7.58,7.6v2.53c0,4.69,2.9,7.6,7.58,7.6,.02,0,.05,0,.07,0,.02,0,.05,0,.07,0,4.67,0,7.58-2.91,7.58-7.6v-2.53c0-4.69-2.91-7.6-7.58-7.6Zm4.31,10.31c0,3.08-1.6,4.86-4.38,4.89-2.78-.03-4.38-1.81-4.38-4.89v-2.88c0-3.08,1.6-4.86,4.38-4.89,2.78,.03,4.38,1.81,4.38,4.89v2.88Zm40.57-5.79s-.06,0-.09,0c-.02,0-.03,0-.05,0-1.77,0-3.03,.6-3.65,1.75l-.19,.35v-1.8h-3.02v12.56h3.17v-7.48c0-1.76,.95-2.77,2.59-2.8,1.57,.03,2.47,1.02,2.47,2.73v7.55h3.17v-8.09c0-2.99-1.64-4.77-4.39-4.77Zm34.42-1.77v-2.4h-10.46v2.4h3.67v12.22h-3.67v2.4h10.46v-2.4h-3.67V9.73h3.67Zm-18.75-2.4h0s-3.28,0-3.28,0l-6.1,17.04h3.43l1.17-3.65h6.66v.04s1.17,3.62,1.17,3.62h3.43l-6.11-17.04h-.36Zm-4.03,10.98l2.57-8.05,2.55,8.05h-5.12Zm-39.45-6.81s-.05,0-.07,0c-.03,0-.05,0-.07,0-1.59,0-2.96,.66-3.68,1.76l-.18,.28v-1.74h-3.02V28.69h3.17v-5.9l.18,.27c.68,1.01,2.01,1.61,3.56,1.61,.03,0,.05,0,.08,0,.02,0,.04,0,.07,0,2.61,0,5.24-1.7,5.24-5.51v-2.14c0-2.74-1.62-5.51-5.26-5.51Zm2.1,7.5c0,2-1.15,3.24-3.01,3.28-1.73-.03-2.94-1.35-2.94-3.23v-1.89c0-1.9,1.22-3.24,2.97-3.28,1.84,.03,2.98,1.28,2.98,3.28v1.84Zm11.05-7.5h0c-.06,0-.12,.01-.18,.01-.06,0-.12-.01-.18-.01h0c-3.57,0-5.78,2.23-5.78,5.81v1.76c0,3.45,2.24,5.59,5.83,5.59,.08,0,.15,0,.22-.01,.05,0,.09,.01,.14,.01,2.41,0,4.09-.88,5.16-2.7l-2.13-1.23c-.71,1.05-1.66,1.84-3.02,1.84-1.82,0-2.91-1.12-2.91-3.01v-.5h8.44v-2.08c0-3.34-2.19-5.49-5.59-5.49Zm-2.86,5.54v-.3c0-2,.95-3.12,2.68-3.2,1.66,.08,2.66,1.18,2.66,2.99v.5s-5.34,0-5.34,0Z"></path><path d="M27.21,12.08c.67-2.01,.44-4.21-.63-6.04-1.61-2.8-4.85-4.24-8.01-3.57C17.16,.89,15.14-.01,13.02,0c-3.23,0-6.1,2.08-7.1,5.15-2.08,.43-3.87,1.73-4.92,3.57-1.62,2.8-1.25,6.32,.92,8.72-.67,2.01-.44,4.21,.63,6.03,1.61,2.81,4.85,4.25,8.02,3.58,1.4,1.58,3.42,2.49,5.54,2.48,3.23,0,6.1-2.08,7.1-5.15,2.08-.43,3.87-1.73,4.91-3.57,1.63-2.8,1.26-6.32-.91-8.72Zm-2.3-5.07c.64,1.12,.88,2.43,.66,3.7-.04-.03-.12-.07-.17-.1l-5.88-3.4c-.3-.17-.67-.17-.97,0l-6.89,3.98v-2.92l5.69-3.29c2.65-1.53,6.03-.62,7.56,2.03Zm-13.25,6.07l2.9-1.68,2.9,1.68v3.35l-2.9,1.68-2.9-1.68v-3.35ZM13.01,1.93c1.3,0,2.55,.45,3.55,1.28-.04,.02-.12,.07-.18,.1l-5.88,3.39c-.3,.17-.48,.49-.48,.84v7.96l-2.53-1.46V7.46c0-3.06,2.47-5.53,5.53-5.54ZM2.68,9.69h0c.65-1.12,1.66-1.98,2.88-2.43v6.99c0,.35,.18,.66,.48,.84l6.88,3.97-2.54,1.47-5.68-3.28c-2.64-1.53-3.55-4.91-2.02-7.56Zm1.55,12.83h0c-.65-1.11-.88-2.43-.66-3.7,.04,.03,.12,.07,.17,.1l5.88,3.4c.3,.17,.67,.17,.97,0l6.88-3.98v2.92l-5.69,3.28c-2.65,1.52-6.03,.62-7.56-2.02Zm11.89,5.08c-1.29,0-2.55-.45-3.54-1.28,.04-.02,.13-.07,.18-.1l5.88-3.39c.3-.17,.49-.49,.48-.84v-7.95l2.53,1.46v6.57c0,3.06-2.48,5.54-5.53,5.54Zm10.34-7.76c-.65,1.12-1.67,1.98-2.88,2.42v-6.99c0-.35-.18-.67-.48-.84h0l-6.89-3.98,2.53-1.46,5.69,3.28c2.65,1.53,3.55,4.91,2.02,7.56Z"></path></svg></a>
+      </div>
+      <div class="col-6 col-sm-auto small-caps">
+        <ul class="d-none d-sm-flex flex-row align-items-center justify-content-between">
+                        
+            <li class="ml-sm-1.5 ml-md-1.75" style="margin-top:0.5px"><a class="nav-link active-parent" href="/api/" data-slug="api">API</a></li>
+            
+            <li class="ml-sm-1.5 ml-md-1.75" style="margin-top:0.5px"><a class="nav-link " href="/research/" data-slug="research">Research</a></li>
+            
+            <li class="ml-sm-1.5 ml-md-1.75" style="margin-top:0.5px"><a class="nav-link " href="/blog/" data-slug="blog">Blog</a></li>
+            
+            <li class="ml-sm-1.5 ml-md-1.75" style="margin-top:0.5px"><a class="nav-link " href="/about/" data-slug="about">About</a></li>
+        </ul>
+        <ul class="d-sm-none" style="margin-top:-1px">
+                        
+            <li class="mb-0.25" style="margin-top:0.5px"><a class="nav-link active-parent" href="/api/" data-slug="api">API</a></li>
+            
+            <li class="mb-0.25" style="margin-top:0.5px"><a class="nav-link " href="/research/" data-slug="research">Research</a></li>
+            
+            <li class="mb-0.25" style="margin-top:0.5px"><a class="nav-link " href="/blog/" data-slug="blog">Blog</a></li>
+            
+            <li class="mb-0.25" style="margin-top:0.5px"><a class="nav-link " href="/about/" data-slug="about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+</header>
+
+<div class="api-secondary-nav sticky bg-bg-70 backdrop-filter-blur">
+  <div class="container nav-row">
+    <ul class="d-flex justify-content-lg-center position-relative">
+      <div class="d-flex align-items-center d-md-none">
+        <button class="api-secondary-nav__toggle position-relative my-n1/6" sttyle="top:0.125rem">
+          <svg class="api-secondary-nav__toggle__open" fill="none" width="24" viewBox="0 0 28 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><clipPath id="a"><path d="m0 0h28v24h-28z"/></clipPath><g clip-path="url(#a)"><path d="m0 15.5h28m-28-7h28z" stroke="rgba(var(--fg),1)" stroke-width="2"/></g></svg>
+          <svg class="api-secondary-nav__toggle__close position-absolute" style="left:0" width="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.40871 3L19 20.819M1 21L18.5913 3.181L1 21Z" stroke="rgba(var(--fg),1)" stroke-width="2"/></svg>
+        </button>
+      </div>
+      <div class="d-none d-md-flex">
+        <li class="ml-0 ml-lg-0.75 mr-0.75 "><a class="small-caps" href="/api">Overview</a></li>
+        <li class="mx-0.75 opacity-40"><a class="small-caps" href="/api/pricing">Pricing</a></li>
+        <li class="mx-0.75 "><a class="btn icon-external right" href="https://beta.openai.com/docs/">Docs</a></li>
+        <li class="mx-0.75 "><a class="btn icon-external right" href="https://beta.openai.com/examples/">Examples</a></li>
+      </div>
+      <div class="position-absolute" style="right:-1px;top:50%;transform:translateY(-50%)">
+        <li class="d-inline-block mr-0.5"><a class="small-caps" href="/api/login">Log in</a></li>
+        <li class="d-inline-block"><a class="btn btn-padded btn-dark btn-circle m-0" href="https://beta.openai.com/signup">Sign up</a></li>
+      </div>
+    </ul>
+  </div>
+
+  <ul class="api-secondary-nav__mobile-list container">
+    <li><a class="d-block py-7/12 btn " href="/api">Overview</a></li>
+    <hr>
+    <li><a class="d-block py-7/12 btn opacity-40" href="/api/pricing">Pricing</a></li>
+    <hr>
+    <li><a class="d-block py-7/12 btn icon-external right " href="https://beta.openai.com/docs/">Docs</a></li>
+    <hr>
+    <li><a class="d-block py-7/12 btn icon-external right " href="https://beta.openai.com/examples/">Examples</a></li>
+  </ul>
+
+</div>
+
+
+<article class="post pt-4" id="post-api-pricing">
+
+  <header class="container text-center mb-3">
+    <h1 class="
+   balance-text
+  
+  
+  
+  
+  
+  
+  
+   mb-0.5
+  ">Pricing</h1>    
+    <div class="post-excerpt mb-1 balance-text line-height-1.3">
+      Simple and flexible. Only pay for what you use.
+    </div>
+    <a href="https://beta.openai.com/signup" class="btn btn-padded btn-dark btn-circle mr-0.5">Get started</a>
+    <a class="btn" href="/contact-sales">Contact sales</a>
+  </header>
+
+  <div class="bg-fg-3 py-2 mt-2 mb-3">
+    <section id="dall-e-api" class="container">
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="pr-1 max-width-xnarrow">
+            <h2 class="mb-0.75">Image models</h2>
+            <p class="mb-0.5 medium-small-copy">Build DALL·E directly into your apps to generate and edit novel images and art. Our image models offer three tiers of resolution for flexibility.</p>
+
+            <a href="https://beta.openai.com/docs/guides/images" class="btn icon-external right faded mb-1">Learn more</a>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="position-relative">
+            <table class="table d-table mt-0">
+              <tr>
+                <th>Resolution</th>
+                <th>Price</th>
+              </tr>
+              <tr>
+                <td>1024&times;1024</td>
+                <td>$0.020 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ image</span></td>
+              </tr>
+              <tr>
+                <td>512&times;512</td>
+                <td>$0.018 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ image</span></td>
+              </tr>
+              <tr>
+                <td>256&times;256</td>
+                <td>$0.016 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ image</span></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  
+  
+  <section id="prices" class="container no-math mb-4">
+    <h2 class="mb-1">Language models</h2>
+
+    <div class="d-flex align-items-baseline">
+      <h3 class="mb-0.5">Base models</h3>
+    </div>
+
+    <div class="row mb-1.5 narrow-gutters">
+      
+        <div class="col-12 col-md-3 mb-thin-gutter">
+          <div class="bg-fg-5 aspect-md-4/3 aspect-xl-8/5 h-100 bg-cover">
+            <div class="h-100 d-flex flex-column justify-content-between p-2/3 p-xl-0.75  pb-md-7/12">
+              <div class="mb-0.125">
+                Ada&ensp;<div class="xsmall-copy d-inline-block d-md-block d-xl-inline-block color-fg-50">Fastest</div>
+              </div>
+              <div>
+                <span class="large-copy font-tnum">$0.0004</span>
+                <span class="xsmall-copy d-md-block d-lg-inline-block color-fg-50">&nbsp;/&#8202;1K tokens</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-12 col-md-3 mb-thin-gutter">
+          <div class="bg-fg-5 aspect-md-4/3 aspect-xl-8/5 h-100 bg-cover">
+            <div class="h-100 d-flex flex-column justify-content-between p-2/3 p-xl-0.75  pb-md-7/12">
+              <div class="mb-0.125">
+                Babbage&ensp;
+              </div>
+              <div>
+                <span class="large-copy font-tnum">$0.0005</span>
+                <span class="xsmall-copy d-md-block d-lg-inline-block color-fg-50">&nbsp;/&#8202;1K tokens</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-12 col-md-3 mb-thin-gutter">
+          <div class="bg-fg-5 aspect-md-4/3 aspect-xl-8/5 h-100 bg-cover">
+            <div class="h-100 d-flex flex-column justify-content-between p-2/3 p-xl-0.75  pb-md-7/12">
+              <div class="mb-0.125">
+                Curie&ensp;
+              </div>
+              <div>
+                <span class="large-copy font-tnum">$0.0020</span>
+                <span class="xsmall-copy d-md-block d-lg-inline-block color-fg-50">&nbsp;/&#8202;1K tokens</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-12 col-md-3 mb-thin-gutter">
+          <div class="bg-fg-5 aspect-md-4/3 aspect-xl-8/5 h-100 bg-cover">
+            <div class="h-100 d-flex flex-column justify-content-between p-2/3 p-xl-0.75  pb-md-7/12">
+              <div class="mb-0.125">
+                Davinci&ensp;<div class="xsmall-copy d-inline-block d-md-block d-xl-inline-block color-fg-50">Most powerful</div>
+              </div>
+              <div>
+                <span class="large-copy font-tnum">$0.0200</span>
+                <span class="xsmall-copy d-md-block d-lg-inline-block color-fg-50">&nbsp;/&#8202;1K tokens</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+    <div class="max-width-xnarrow">
+      <div class="content no-col medium-small-copy js-widow"><p>Multiple models, each with different capabilities and price points. <strong>Ada</strong> is the fastest model, while <strong>Davinci</strong> is the most powerful.</p>
+
+<p>Prices are per 1,000 tokens. You can think of tokens as pieces of words, where 1,000 tokens is about 750 words. This paragraph is 35 tokens.</p>
+
+<div class="mt-0.75"><a href="#faq-token" class="btn icon-down right faded" onclick="openAccordion('#faq-token')">Learn more</a></div>
+</div>
+    </div>
+  </section>
+
+  
+  
+  <section class="container mb-2">
+    <div class="row">
+      
+        <div class="col-12 col-md-4 mb-1.5">
+          <h3 class="mb-1/3 d-flex"><span class="icon position-relative ml-n0.125 mr-0.25" style="margin-top:-1px">flag</span>Start for free</h3>
+          <div class="content no-col medium-xsmall-copy line-height-1.5">Start experimenting with $18 in free credit that can be used during your first 3 months.</div>
+        </div>
+      
+        <div class="col-12 col-md-4 mb-1.5">
+          <h3 class="mb-1/3 d-flex"><span class="icon position-relative ml-n0.125 mr-0.25" style="margin-top:-1px">barup</span>Pay as you go</h3>
+          <div class="content no-col medium-xsmall-copy line-height-1.5">To keep things simple and flexible, pay only for the resources you use.</div>
+        </div>
+      
+        <div class="col-12 col-md-4 mb-1.5">
+          <h3 class="mb-1/3 d-flex"><span class="icon position-relative ml-n0.125 mr-0.25" style="margin-top:-1px">check</span>Choose your model</h3>
+          <div class="content no-col medium-xsmall-copy line-height-1.5">Use the right model for the job. We offer a spectrum of capabilities and price points.</div>
+        </div>
+      
+    </div>
+  </section>
+  <section id="quotas" class="container mb-3">
+    <hr class="mb-3">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="pr-1 max-width-xnarrow">
+          <h3 class="mb-0.75">Fine-tuned models</h3>
+          <p class="mb-0.5 medium-small-copy">Create your own custom models by <a class="underlined fade" href="https://beta.openai.com/docs/guides/fine-tuning">fine-tuning</a> our base models with your training data. Once you fine-tune a model, you'll be billed only for the tokens you use in requests to that model.</p>
+          <a id="faq-fine-tuning-pricing-button" href="/api/pricing/#faq-fine-tuning-pricing-calculation" class="btn icon-down right faded mb-1">Learn more</a>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="position-relative">
+          <table class="table d-table mt-0">
+            <tr>
+              <th>Model</th>
+              <th>Training</th>
+              <th>Usage</th>
+            </tr>
+            <tr>
+              <td>Ada</td>
+              <td>$0.0004 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+              <td>$0.0016 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+            </tr>
+            <tr>
+              <td>Babbage</td>
+              <td>$0.0006 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+              <td>$0.0024 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+            </tr>
+            <tr>
+              <td>Curie</td>
+              <td>$0.0030 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+              <td>$0.0120 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+            </tr>
+            <tr>
+              <td>Davinci</td>
+              <td>$0.0300 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+              <td>$0.1200 <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <hr class="my-3">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="pr-1 max-width-xnarrow">
+          <h3 class="mb-0.75">Embedding models</h3>
+          <p class="mb-1 medium-small-copy">Build advanced search, clustering, topic modeling, and classification functionality with our <a class="underlined fade" href="https://beta.openai.com/docs/guides/embeddings">embeddings</a> offering.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="position-relative">
+          <!-- current pricing -->
+          <table class="table d-table mt-0">
+            <tr>
+              <th>Model</th>
+              <th style="width:66%">Usage</th>
+            </tr>
+            <tr>
+              <td>Ada</td>
+              <td style="width:66%">
+                <span>$0.0004</span>
+                <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span>
+            </td>
+            </tr>
+          </table>
+          <figcaption>This Ada model, <kbd>text-embedding-ada-002</kbd>, is a better and lower cost replacement for our older embedding models.&ensp;<a id="oldEmbeddingPricingToggle" class="fade"><span id="showhide">Show</span> old pricing</a></figcaption>
+          <!-- old pricing -->
+          <table class="table mt-1" id="oldEmbeddingPricing" style="display:none">
+            <tr>
+              <th>Model</th>
+              <th style="width:66%">Usage</th>
+            </tr>
+            <tr>
+              <td>Ada v1</td>
+              <td style="width:66%">
+                <span>$0.0040</span>
+                <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span>
+            </td>
+            </tr>
+            <tr>
+              <td>Babbage v1</td>
+              <td style="width:66%">
+                <span>$0.0050</span>
+                <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Curie v1</td>
+              <td style="width:66%">
+                <span>$0.0200</span>
+                <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Davinci v1</td>
+              <td style="width:66%">
+                <span>$0.2000</span>
+                <span class="opacity-40 text-nowrap" style="font-size: .7rem;">/ 1K tokens</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="quotas" class="container mb-3">
+    <hr class="mb-3">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h2 class="mb-1">Usage quotas</h2>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="content no-col medium-xsmall-copy line-height-1.5"><p>Because this technology is new, we also want to make sure that rollouts are done responsibly. When you sign up, you’ll be granted an initial spend limit, or quota, and we’ll increase that limit over time as you build a track record with your application.</p>
+
+<p>If you need more tokens, you can always request a quota increase. When you’re ready to go live, you’ll submit a <a href="https://beta.openai.com/docs/going-live">Pre-launch Review Request</a> which will also cover any additional quota increase requests.</p>
+</div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section id="faq" class="bg-fg-3 pt-4 pb-4 mb-2">
+    <div class="container mb-0.5">
+      <div class="row">
+        <div class="content">
+          <h2 class="font-xlarge mb-1.5" id="faq-title">Frequently Asked Questions</h2>
+
+          <div class="medium-xsmall-copy line-height-1.5">
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-token">
+                <input type="checkbox" class="accordion-input" id="faq-token-input" onclick="setCustomHash('faq-token')">
+                <label for="faq-token-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">What's a token?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>You can think of tokens as pieces of words used for natural language processing. For English text, 1 token is approximately 4 characters or 0.75 words. As a point of reference, the collected works of Shakespeare are about 900,000 words or 1.2M tokens.</p>
+
+<p>To learn more about how tokens work and estimate your usage…</p>
+
+<ul>
+  <li>Experiment with our interactive <a href="https://beta.openai.com/tokenizer">Tokenizer tool</a>.</li>
+  <li>Log in to your account and enter text into the Playground. The counter in the footer will display how many tokens are in your text.</li>
+</ul>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-which-model">
+                <input type="checkbox" class="accordion-input" id="faq-which-model-input" onclick="setCustomHash('faq-which-model')">
+                <label for="faq-which-model-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">Which model should I use?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>While Davinci is generally the most capable model, the other models can perform certain tasks extremely well and, in some cases, significantly faster. They also have cost advantages. For example, Curie can perform many of the same tasks as Davinci, but faster and for 1/10th the cost. We encourage developers to experiment to find the model that’s most efficient for your application. Visit our documentation for a more detailed <a href="https://beta.openai.com/docs/engines">model comparison</a>.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-token-usage">
+                <input type="checkbox" class="accordion-input" id="faq-token-usage-input" onclick="setCustomHash('faq-token-usage')">
+                <label for="faq-token-usage-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">How will I know how many tokens I've used each month?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>Log in to your account to view your <a href="https://beta.openai.com/account/usage">usage tracking dashboard</a>. This page will show you how many tokens you've used during the current and past billing cycles.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-spending">
+                <input type="checkbox" class="accordion-input" id="faq-spending-input" onclick="setCustomHash('faq-spending')">
+                <label for="faq-spending-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">How can I manage my spending?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>You can configure a usage <strong>hard limit</strong> in your billing settings, after which we'll stop serving your requests. You may also configure a <strong>soft limit</strong> to receive an email alert once you pass a certain usage threshold.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-playground-usage">
+                <input type="checkbox" class="accordion-input" id="faq-playground-usage-input" onclick="setCustomHash('faq-playground-usage')">
+                <label for="faq-playground-usage-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">Does Playground usage count against my quota?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>Yes, we treat Playground usage the same as regular API usage.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-completions-pricing">
+                <input type="checkbox" class="accordion-input" id="faq-completions-pricing-input" onclick="setCustomHash('faq-completions-pricing')">
+                <label for="faq-completions-pricing-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">How is pricing calculated for Completions?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p><a href="https://beta.openai.com/docs/api-reference/completions">Completions</a> requests are billed based on the number of tokens sent in your prompt plus the number of tokens in the completion(s) returned by the API.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">best_of</code> and <code class="language-plaintext highlighter-rouge">n</code> parameters may also impact costs. Because these parameters generate multiple completions per prompt, they act as multipliers on the number of tokens returned.</p>
+
+<p>Your request may use up to <code class="language-plaintext highlighter-rouge">num_tokens(prompt) + max_tokens * max(n, best_of)</code> tokens, which will be billed at the per-engine rates outlined at the top of this page.</p>
+
+<p>In the simplest case, if your prompt contains 10 tokens and you request a single 90 token completion from the davinci engine, your request will use 100 tokens and will cost $0.002.</p>
+
+<p>You can limit costs by reducing prompt length or maximum response length, limiting usage of <code class="language-plaintext highlighter-rouge">best_of</code>/<code class="language-plaintext highlighter-rouge">n</code>, adding appropriate stop sequences, or using engines with lower per-token costs.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-fine-tuning-pricing-calculation">
+                <input type="checkbox" class="accordion-input" id="faq-fine-tuning-pricing-calculation-input" onclick="setCustomHash('faq-fine-tuning-pricing-calculation')">
+                <label for="faq-fine-tuning-pricing-calculation-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">How is pricing calculated for Fine-tuning?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>There are two components to fine-tuning pricing: training and usage.</p>
+
+<p>When training a fine-tuned model, the total tokens used will be billed according to our <a href="#quotas">training rates</a>. Note that the number of training tokens depends on the number of tokens in your training dataset <strong>and</strong> your chosen number of <a href="https://beta.openai.com/docs/guides/fine-tuning/hyperparameters">training epochs</a>. The default number of epochs is 4.</p>
+
+<div style="
+  background-color: rgba(25, 25, 39, .05);
+  padding: .5em 1em;
+">
+  (Tokens in your training file * Number of training epochs) = Total training tokens
+</div>
+<p><br />
+Once you fine-tune a model, you'll be billed only for the tokens you use. Requests sent to fine-tuned models are billed at our <a href="#quotas">usage rates</a>.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-classifications-pricing">
+                <input type="checkbox" class="accordion-input" id="faq-classifications-pricing-input" onclick="setCustomHash('faq-classifications-pricing')">
+                <label for="faq-classifications-pricing-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">How is pricing calculated for Classifications?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p><a href="https://beta.openai.com/docs/api-reference/classifications">Classifications</a> requests are billed based on the number of tokens in the inputs you provide. Internally this endpoint makes calls to the <a href="https://beta.openai.com/docs/api-reference/searches">search</a> and <a href="https://beta.openai.com/docs/api-reference/completions">completions</a> endpoints, so its costs are a function of the costs of those endpoints.</p>
+
+<p>The actual cost per token is based upon which <a href="https://beta.openai.com/docs/engines">models</a> you select to perform both the search and the completion, which are controlled by the <code class="language-plaintext highlighter-rouge">search_model</code> and <code class="language-plaintext highlighter-rouge">model</code> parameters respectively.</p>
+
+<p>You may provide a <code class="language-plaintext highlighter-rouge">file</code> containing the examples to search over, or you can explicitly specify <code class="language-plaintext highlighter-rouge">examples</code> in your request. Providing a file makes search faster and more cost effective when the number of examples you'd like to search over is greater than <code class="language-plaintext highlighter-rouge">max_examples</code>. In this scenario, costs are largely based on the number of examples reranked (controlled by <code class="language-plaintext highlighter-rouge">max_examples</code>) and the total length of those examples. If you pass <code class="language-plaintext highlighter-rouge">examples</code> in your request instead, costs are based on the total length of all those examples.</p>
+
+<p>The length of the <code class="language-plaintext highlighter-rouge">query</code> passed into the model as well as the final classification label that is generated will also factor into costs.</p>
+
+<p>You can use the <code class="language-plaintext highlighter-rouge">return_prompt</code> debugging flag to understand the length of the final combined prompt that will be sent to the <a href="https://beta.openai.com/docs/api-reference/completions">completions</a> endpoint to generate the classification label.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-search-pricing">
+                <input type="checkbox" class="accordion-input" id="faq-search-pricing-input" onclick="setCustomHash('faq-search-pricing')">
+                <label for="faq-search-pricing-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">How is pricing calculated for Search?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p><a href="https://beta.openai.com/docs/api-reference/searches">Search</a> requests are billed based on the total number of tokens in the documents you provide, plus the tokens in the query and the tokens needed to instruct the model on how to perform the operation. The API also uses a reference document to generate a response, adding 1 to the total document count. These tokens are billed at the per-engine rates outlined at the top of this page.</p>
+
+<p>You may provide a <code class="language-plaintext highlighter-rouge">file</code> containing the documents to search over, or you can explicitly specify <code class="language-plaintext highlighter-rouge">documents</code> in your request. Providing a file makes search faster and more cost effective when the number of documents you'd like to search over is greater than <code class="language-plaintext highlighter-rouge">max_rerank</code>. In this scenario, costs are largely based on the number of documents reranked (controlled by <code class="language-plaintext highlighter-rouge">max_rerank</code>) and the total length of those documents. If you pass <code class="language-plaintext highlighter-rouge">documents</code> in your request instead, costs are based on the total length of all those documents.</p>
+
+<p>Below you'll find the formula for calculating overall token consumption. The 14 represents the additional tokens the API uses per document to accomplish the Semantic Search task, and the added 1 is a reference document:</p>
+
+<div class="bg-fg-3 p-0.5 rounded-small mb-1">
+  Number of tokens in all of your documents<br />
+  + (Number of documents + 1) * 14<br />
+  + (Number of documents + 1) * Number of tokens in your query<br />
+  <hr class="my-0.25" />
+  = Total tokens
+</div>
+
+<p>As an example, if you had 5 documents (plus one added by the API) with token lengths of <code class="language-plaintext highlighter-rouge">12, 34, 22, 33, 78</code> (179 total) and your query was 8 tokens, the total tokens consumed would be: <code class="language-plaintext highlighter-rouge">179 + (6 * 14) + (6 * 8) = 311</code></p>
+
+<p>You may use the <a href="https://gpttools.com/searchtokens">Search Token Estimator</a> or see the code from the <a href="https://repl.it/@NikolasTezak/API-TokenLoadEstimator#main.py">Python Estimator</a> to further understand search token usage.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-answers-pricing">
+                <input type="checkbox" class="accordion-input" id="faq-answers-pricing-input" onclick="setCustomHash('faq-answers-pricing')">
+                <label for="faq-answers-pricing-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">How is pricing calculated for Answers?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p><a href="https://beta.openai.com/docs/api-reference/answers">Answers</a> requests are billed based on the number of tokens in the inputs you provide and the answer that the model generates. Internally, this endpoint makes calls to the <a href="https://beta.openai.com/docs/api-reference/searches">Search</a> and <a href="https://beta.openai.com/docs/api-reference/completions">Completions</a> APIs, so its costs are a function of the costs of those endpoints.</p>
+
+<p>The actual cost per token is based upon which <a href="https://beta.openai.com/docs/engines">models</a> you select to perform both the search and the completion, which are controlled by the <code class="language-plaintext highlighter-rouge">search_model</code> and <code class="language-plaintext highlighter-rouge">model</code> parameters respectively.</p>
+
+<p>You may provide a <code class="language-plaintext highlighter-rouge">file</code> containing the documents to search over, or you can explicitly specify <code class="language-plaintext highlighter-rouge">documents</code> in your request. Providing a file makes search faster and more cost effective when the number of documents you'd like to search over is greater than <code class="language-plaintext highlighter-rouge">max_rerank</code>. In this scenario, costs are largely based on the number of documents reranked (controlled by <code class="language-plaintext highlighter-rouge">max_rerank</code>) and the total length of those documents. If you pass <code class="language-plaintext highlighter-rouge">documents</code> in your request instead, costs are based on the total length of all those documents.</p>
+
+<p>The length of <code class="language-plaintext highlighter-rouge">examples</code>, <code class="language-plaintext highlighter-rouge">examples_context</code>, <code class="language-plaintext highlighter-rouge">question</code> and the length of the generated answer (controlled by <code class="language-plaintext highlighter-rouge">max_tokens</code>/<code class="language-plaintext highlighter-rouge">stop</code>) will also impact costs.</p>
+
+<p>You can use the <code class="language-plaintext highlighter-rouge">return_prompt</code> debugging flag to understand the length of the final combined prompt that will be sent to the <a href="https://beta.openai.com/docs/api-reference/completions">completions</a> endpoint to generate the answer.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-sla">
+                <input type="checkbox" class="accordion-input" id="faq-sla-input" onclick="setCustomHash('faq-sla')">
+                <label for="faq-sla-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">Is there an SLA on the various models?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>We will be publishing an SLA soon. In the meantime you can visit our <a href="https://status.openai.com/">Status page</a> to monitor service availability and view historical uptime. If your company or application has specific requirements, please <a href="/contact-sales">contact our sales team</a>.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+              <hr class="my-0">
+              <div class="accordion" id="faq-azure-availability">
+                <input type="checkbox" class="accordion-input" id="faq-azure-availability-input" onclick="setCustomHash('faq-azure-availability')">
+                <label for="faq-azure-availability-input" class="accordion-label">
+                  <div class="accordion-label-inner position-relative">
+                    <div class="pr-2/3 py-2/3 font-bold">Is the API available on Microsoft Azure?</div>
+                    <span class="icon accordion-icon accordion-icon-closed position-absolute" style="right:0;">navigatedown</span>
+                    <span class="icon accordion-icon accordion-icon-open position-absolute" style="right:0;">navigateup</span>
+                  </div>
+                </label>
+                <div class="accordion-content">
+                  <div class="mt-1/3 mb-1.5">
+                    <p>Yes. Azure customers can access the OpenAI API on Azure with the compliance, regional support, and enterprise-grade security that Azure offers. <a href="https://azure.microsoft.com/en-us/services/openai-service/#overview">Learn more</a> or contact <a href="mailto:sales@openai.com">sales@openai.com</a>.</p>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+            <hr class="my-0">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="container text-center pt-4">
+    <div class="mx-auto max-width-wide">
+      <h2 class="h1.5 balance-text mb-1.5">Get started with OpenAI’s powerful language and code generation models.</h2>
+      <a href="https://beta.openai.com/signup" class="btn btn-padded btn-dark btn-circle mr-0.5">Get started</a>
+      <a class="btn" href="/contact-sales">Contact sales</a>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+
+  
+
+<footer class="footer container medium-xsmall-copy line-height-1.6">
+  <a href="/" class="d-block footer-logo mb-1.75" style="margin-left:-1px"><!-- contact comms-team@openai.com for official logo asset; below is hinted version --><svg id="openai-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 29.53"><path d="M40.7,6.98s-.05,0-.07,0c-.02,0-.05,0-.07,0-4.67,0-7.58,2.91-7.58,7.6v2.53c0,4.69,2.9,7.6,7.58,7.6,.02,0,.05,0,.07,0,.02,0,.05,0,.07,0,4.67,0,7.58-2.91,7.58-7.6v-2.53c0-4.69-2.91-7.6-7.58-7.6Zm4.31,10.31c0,3.08-1.6,4.86-4.38,4.89-2.78-.03-4.38-1.81-4.38-4.89v-2.88c0-3.08,1.6-4.86,4.38-4.89,2.78,.03,4.38,1.81,4.38,4.89v2.88Zm40.57-5.79s-.06,0-.09,0c-.02,0-.03,0-.05,0-1.77,0-3.03,.6-3.65,1.75l-.19,.35v-1.8h-3.02v12.56h3.17v-7.48c0-1.76,.95-2.77,2.59-2.8,1.57,.03,2.47,1.02,2.47,2.73v7.55h3.17v-8.09c0-2.99-1.64-4.77-4.39-4.77Zm34.42-1.77v-2.4h-10.46v2.4h3.67v12.22h-3.67v2.4h10.46v-2.4h-3.67V9.73h3.67Zm-18.75-2.4h0s-3.28,0-3.28,0l-6.1,17.04h3.43l1.17-3.65h6.66v.04s1.17,3.62,1.17,3.62h3.43l-6.11-17.04h-.36Zm-4.03,10.98l2.57-8.05,2.55,8.05h-5.12Zm-39.45-6.81s-.05,0-.07,0c-.03,0-.05,0-.07,0-1.59,0-2.96,.66-3.68,1.76l-.18,.28v-1.74h-3.02V28.69h3.17v-5.9l.18,.27c.68,1.01,2.01,1.61,3.56,1.61,.03,0,.05,0,.08,0,.02,0,.04,0,.07,0,2.61,0,5.24-1.7,5.24-5.51v-2.14c0-2.74-1.62-5.51-5.26-5.51Zm2.1,7.5c0,2-1.15,3.24-3.01,3.28-1.73-.03-2.94-1.35-2.94-3.23v-1.89c0-1.9,1.22-3.24,2.97-3.28,1.84,.03,2.98,1.28,2.98,3.28v1.84Zm11.05-7.5h0c-.06,0-.12,.01-.18,.01-.06,0-.12-.01-.18-.01h0c-3.57,0-5.78,2.23-5.78,5.81v1.76c0,3.45,2.24,5.59,5.83,5.59,.08,0,.15,0,.22-.01,.05,0,.09,.01,.14,.01,2.41,0,4.09-.88,5.16-2.7l-2.13-1.23c-.71,1.05-1.66,1.84-3.02,1.84-1.82,0-2.91-1.12-2.91-3.01v-.5h8.44v-2.08c0-3.34-2.19-5.49-5.59-5.49Zm-2.86,5.54v-.3c0-2,.95-3.12,2.68-3.2,1.66,.08,2.66,1.18,2.66,2.99v.5s-5.34,0-5.34,0Z"></path><path d="M27.21,12.08c.67-2.01,.44-4.21-.63-6.04-1.61-2.8-4.85-4.24-8.01-3.57C17.16,.89,15.14-.01,13.02,0c-3.23,0-6.1,2.08-7.1,5.15-2.08,.43-3.87,1.73-4.92,3.57-1.62,2.8-1.25,6.32,.92,8.72-.67,2.01-.44,4.21,.63,6.03,1.61,2.81,4.85,4.25,8.02,3.58,1.4,1.58,3.42,2.49,5.54,2.48,3.23,0,6.1-2.08,7.1-5.15,2.08-.43,3.87-1.73,4.91-3.57,1.63-2.8,1.26-6.32-.91-8.72Zm-2.3-5.07c.64,1.12,.88,2.43,.66,3.7-.04-.03-.12-.07-.17-.1l-5.88-3.4c-.3-.17-.67-.17-.97,0l-6.89,3.98v-2.92l5.69-3.29c2.65-1.53,6.03-.62,7.56,2.03Zm-13.25,6.07l2.9-1.68,2.9,1.68v3.35l-2.9,1.68-2.9-1.68v-3.35ZM13.01,1.93c1.3,0,2.55,.45,3.55,1.28-.04,.02-.12,.07-.18,.1l-5.88,3.39c-.3,.17-.48,.49-.48,.84v7.96l-2.53-1.46V7.46c0-3.06,2.47-5.53,5.53-5.54ZM2.68,9.69h0c.65-1.12,1.66-1.98,2.88-2.43v6.99c0,.35,.18,.66,.48,.84l6.88,3.97-2.54,1.47-5.68-3.28c-2.64-1.53-3.55-4.91-2.02-7.56Zm1.55,12.83h0c-.65-1.11-.88-2.43-.66-3.7,.04,.03,.12,.07,.17,.1l5.88,3.4c.3,.17,.67,.17,.97,0l6.88-3.98v2.92l-5.69,3.28c-2.65,1.52-6.03,.62-7.56-2.02Zm11.89,5.08c-1.29,0-2.55-.45-3.54-1.28,.04-.02,.13-.07,.18-.1l5.88-3.39c.3-.17,.49-.49,.48-.84v-7.95l2.53,1.46v6.57c0,3.06-2.48,5.54-5.53,5.54Zm10.34-7.76c-.65,1.12-1.67,1.98-2.88,2.42v-6.99c0-.35-.18-.67-.48-.84h0l-6.89-3.98,2.53-1.46,5.69,3.28c2.65,1.53,3.55,4.91,2.02,7.56Z"></path></svg></a>
+  <div class="row mb-1">
+    
+      <div class="col-6 col-lg">
+        <ul class="mb-2">
+          <div class="small-caps mb-1/3">Featured</div>
+          
+            <li><a class="fade" href="/blog/chatgpt/">ChatGPT</a></li>
+          
+            <li><a class="fade" href="/dall-e-2/">DALL·E 2</a></li>
+          
+            <li><a class="fade" href="/blog/whisper/">Whisper</a></li>
+          
+            <li><a class="fade" href="/alignment/">Alignment</a></li>
+          
+            <li><a class="fade" href="/fund/">Startup Fund</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="col-6 col-lg">
+        <ul class="mb-2">
+          <div class="small-caps mb-1/3">API</div>
+          
+            <li><a class="fade" href="/api/">Overview</a></li>
+          
+            <li><a class="fade" href="/api/pricing/">Pricing</a></li>
+          
+            <li><a class="fade" href="/api/examples/">Examples</a></li>
+          
+            <li><a class="fade" href="/api/docs/">Docs</a></li>
+          
+            <li><a class="fade" href="/api/policies/">Terms & Policies</a></li>
+          
+            <li><a class="fade" href="https://status.openai.com/">Status</a></li>
+          
+            <li><a class="fade" href="/api/login/">Log in</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="col-6 col-lg">
+        <ul class="mb-2">
+          <div class="small-caps mb-1/3">Blog</div>
+          
+            <li><a class="fade" href="/blog/">Index</a></li>
+          
+            <li><a class="fade" href="/blog/tags/research/">Research</a></li>
+          
+            <li><a class="fade" href="/blog/tags/announcements/">Announcements</a></li>
+          
+            <li><a class="fade" href="/blog/tags/events/">Events</a></li>
+          
+            <li><a class="fade" href="/blog/tags/milestones/">Milestones</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="col-6 col-lg">
+        <ul class="mb-2">
+          <div class="small-caps mb-1/3">Information</div>
+          
+            <li><a class="fade" href="/about/">About Us</a></li>
+          
+            <li><a class="fade" href="/charter/">Our Charter</a></li>
+          
+            <li><a class="fade" href="/research/">Our Research</a></li>
+          
+            <li><a class="fade" href="/publications/">Publications</a></li>
+          
+            <li><a class="fade" href="/newsroom/">Newsroom</a></li>
+          
+            <li><a class="fade" href="/careers/">Careers</a></li>
+          
+        </ul>
+      </div>
+    
+  </div>
+  <div class="row align-items-center mb-0.125">
+    <div class="col-12 col-md mb-0.5">
+      <a class="fade" style="margin-top:1px" href="/">OpenAI &copy; 2015–2022</a>&emsp;<wbr><a class="fade" style="margin-top:1px" href="/privacy/">Privacy&nbsp;Policy</a>&emsp;<wbr><a class="fade" style="margin-top:1px" href="/terms/">Terms&nbsp;of&nbsp;Use</a>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 col-xl-3 mb-0.5">
+      <div class="d-block d-md-none" style="font-size:1.333333rem"> <a class="fade icon" href="https://twitter.com/openai">twitter</a> &ensp; <a class="fade icon" href="https://youtube.com/openai">youtube</a> &ensp; <a class="fade icon" href="https://github.com/openai/">github</a> &ensp; <a class="fade icon" href="https://soundcloud.com/openai_audio">soundcloud</a> &ensp; <a class="fade icon" href="https://linkedin.com/company/openai">linkedin</a> &ensp; <a class="fade icon" href="https://facebook.com/openai.research/">facebook</a> </div> <div class="d-none d-md-block" style="font-size:1.166667rem"> <div class="d-flex justify-content-between"> <a class="fade icon" href="https://twitter.com/openai">twitter</a> &ensp; <a class="fade icon" href="https://youtube.com/openai">youtube</a> &ensp; <a class="fade icon" href="https://github.com/openai/">github</a> &ensp; <a class="fade icon" href="https://soundcloud.com/openai_audio">soundcloud</a> &ensp; <a class="fade icon" href="https://linkedin.com/company/openai">linkedin</a> &ensp; <a class="fade icon" href="https://facebook.com/openai.research/">facebook</a> </div> </div>
+    </div>
+  </div>
+</footer>
+  <script type="text/javascript" src="https://openai.com/assets/scripts/main.js?v=b4ca92bb18"></script>
+  <script>/*** Given a hash, open that accordion item. Then,* scroll up a little bit to make sure the FAQ question* is visble. This is used as a click handler for * hash/id links. The idea is that clicking the * link already scrolls to the item, so when this * function scrolls up a little, it ends up in the * right place*/function openAccordion(hash) { var id = hash || window.location.hash; if (!id) return; var accordion = document.querySelector(id); if (!accordion) return; var accordionInput = accordion.querySelector(id + '-input'); if (!accordionInput.checked) accordionInput.checked = true; setTimeout(function () { window.scrollBy({ top: -60 }); }, 0);}function setCustomHash(id) { var accordion = document.getElementById(id); if (!accordion) return; var accordionInput = document.getElementById(id + '-input'); if (!accordionInput.checked) return; if (history.pushState) { history.pushState(null, null, '#' + id); } else { location.hash = '#' + id; }}function initNavToggle () { var navToggleEl = document.querySelector('.api-secondary-nav__toggle'); var navContainerEl = document.querySelector('.api-secondary-nav'); if (!navToggleEl || !navContainerEl) { return } navToggleEl.addEventListener('click', function () { navContainerEl.classList.toggle('api-secondary-nav--open'); });}function initEmbeddingPricingToggle() { var toggleEl = document.getElementById('oldEmbeddingPricingToggle'); var showhideEl = toggleEl.querySelector('#showhide'); var tableEl = document.getElementById('oldEmbeddingPricing'); if (!toggleEl || !showhideEl || !tableEl) return; toggleEl.addEventListener('click', function () { if (tableEl.style.display === 'none') { tableEl.style.display = 'table'; showhideEl.innerText = 'Hide'; } else { tableEl.style.display = 'none'; showhideEl.innerText = 'Show'; } });}document.addEventListener('DOMContentLoaded', function () { initNavToggle(); var hash = window.location.hash; if (hash) openAccordion(hash); var faqFineTuningPricingButton = document.querySelector("#faq-fine-tuning-pricing-button"); if (faqFineTuningPricingButton) { faqFineTuningPricingButton.addEventListener("click", function () { openAccordion("#faq-fine-tuning-pricing-calculation"); }); } initEmbeddingPricingToggle();});</script>
+
+  
+</body>
+</html>
