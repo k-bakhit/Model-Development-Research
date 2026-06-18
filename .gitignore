@@ -1,0 +1,26 @@
+# ---- Secrets / credentials ----
+*.env
+.env
+.env.*
+!.env.example
+*_Key.env
+secrets.*
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# ---- OS / editor ----
+.DS_Store
+**/.DS_Store
+.vscode/
+
+# ---- Large / regenerable data outputs ----
+# Raw API dumps and archives are large and reproducible from scripts.
+# Comment these out if you DO want to version the data.
+artificial_analysis.json
+*.zip

@@ -1,0 +1,23 @@
+HF AI Energy Score - data source notes
+=======================================
+
+No single aggregated master CSV is published in the HuggingFace dataset.
+The dataset AIEnergyScore/results_v0 stores results as ~150 per-model JSON files
+(one results.json per model), NOT a combined CSV/parquet.
+
+Primary dataset (per-model results.json files):
+  https://huggingface.co/datasets/AIEnergyScore/results_v0
+  Dataset API listing: https://huggingface.co/api/datasets/AIEnergyScore/results_v0
+  Example file (raw): https://huggingface.co/datasets/AIEnergyScore/results_v0/resolve/main/meta-llama/Meta-Llama-3.1-8B/results.json
+  Format: per-model JSON, path pattern "<org>/<model>/results.json" (e.g. "01-ai/Yi-1.5-34B/results.json").
+
+Interactive leaderboard (rendered view of the above):
+  https://huggingface.co/spaces/AIEnergyScore/Leaderboard
+
+Notes:
+- The "master_results.csv" referenced in the AIEnergyScore GitHub README is generated
+  locally by batch_runner.py after running benchmarks; it is not committed/published.
+- The "AI Energy Score (Oct 2025) - Models.csv" in the repo is an INPUT model-config
+  list, not a results table.
+- To build a combined CSV you would download each results.json and merge them
+  (no clean single CSV exists upstream, so none was fabricated here).

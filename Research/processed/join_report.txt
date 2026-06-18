@@ -1,0 +1,15 @@
+JOIN REPORT — master_models.csv
+========================================
+Epoch backbone rows (notable models): 1030
+  with Artificial Analysis pricing  : 95
+  with ML.Energy params             : 6
+  with LifeArchitect benchmarks     : 69
+
+Source pools available:  AA=399  ML.Energy=46  LifeArchitect=877
+
+Low match rates are expected: names differ across sources and the Epoch
+'notable' set skews older/research while Artificial Analysis skews to
+currently-served commercial endpoints. Improve matching by editing norm()
+or adding a manual alias map (e.g. 'gpt4' -> 'gpt-4').
+
+Output columns (36): model_name, developer, country, release_date, parameters, training_compute_flop, training_power_draw_w, training_cost_usd_2023, key, aa_creator, aa_release_date, price_1m_input, price_1m_output, price_1m_blended_3to1, intelligence_index, coding_index, math_index, gpqa, mmlu_pro, output_tokens_per_sec, time_to_first_token_s, mle_repo, mle_nickname, mle_total_params_b, mle_active_params_b, mle_precision, energy_wh_per_1k, energy_wh_per_1k_min, energy_wh_per_1k_max, gpus, energy_source_quality, la_model, la_lab, la_mmlu, la_gpqa, la_announced

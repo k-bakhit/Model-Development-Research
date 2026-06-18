@@ -1,0 +1,20 @@
+ML.Energy Leaderboard - data source notes
+==========================================
+
+Saved file: ml_energy_leaderboard.json
+  Direct source: https://ml.energy/leaderboard/data/index.json
+  Format: JSON. Contains the leaderboard model registry (model id -> nickname,
+  total/activated params (billions), architecture, weight precision), the list of
+  benchmark "tasks", an "architectures" map, and "last_updated" (2026-02-16).
+
+Per-task energy RESULTS are served alongside index.json under
+  https://ml.energy/leaderboard/data/  (the Next.js app fetches per-task data here),
+  but exact per-task result filenames were not confirmed (tried lm-arena-chat.json
+  and public/data/*.json on GitHub raw -> empty). The repo builds these into
+  public/data via scripts/build_data.py.
+
+Other sources:
+  Leaderboard repo:  https://github.com/ml-energy/leaderboard
+  Benchmark repo:    https://github.com/ml-energy/benchmark
+  Data toolkit:      https://github.com/ml-energy/data  (pip install mlenergy-data)
+  Live leaderboard:  https://ml.energy/leaderboard
