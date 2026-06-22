@@ -1,0 +1,144 @@
+model,date,input_price_per_1m,output_price_per_1m,provider
+claude 3 haiku,2025-05-12,0.25,1.25,anthropic
+claude 3 haiku,2025-05-19,0.25,1.25,anthropic
+claude 3 opus,2025-05-12,15.0,75.0,anthropic
+claude 3 opus,2025-05-19,15.0,75.0,anthropic
+claude 3.5 haiku,2025-05-12,0.8,4.0,anthropic
+claude 3.5 haiku,2025-05-19,0.8,4.0,anthropic
+claude 3.5 sonnet,2025-05-12,3.0,15.0,anthropic
+claude 3.5 sonnet,2025-05-19,3.0,15.0,anthropic
+claude 3.7 sonnet,2025-05-12,3.0,15.0,anthropic
+claude 3.7 sonnet,2025-05-19,3.0,15.0,anthropic
+claude haiku 3,2025-07-01,0.25,1.25,anthropic
+claude haiku 3,2025-07-04,0.25,1.25,anthropic
+claude haiku 3.5,2025-07-01,0.8,4.0,anthropic
+claude haiku 3.5,2025-07-04,0.8,4.0,anthropic
+claude opus 3,2025-07-01,15.0,75.0,anthropic
+claude opus 3,2025-07-04,15.0,75.0,anthropic
+claude opus 4,2025-07-01,15.0,75.0,anthropic
+claude opus 4,2025-07-04,15.0,75.0,anthropic
+claude sonnet 3.5,2025-07-01,3.0,15.0,anthropic
+claude sonnet 3.5,2025-07-04,3.0,15.0,anthropic
+claude sonnet 3.7,2025-07-01,3.0,15.0,anthropic
+claude sonnet 3.7,2025-07-04,3.0,15.0,anthropic
+claude sonnet 4,2025-07-01,3.0,15.0,anthropic
+claude sonnet 4,2025-07-04,3.0,15.0,anthropic
+gemini 2.5 flash,2025-10-02,0.3,2.5,google
+gemini 2.5 flash,2026-01-01,0.3,2.5,google
+gemini 2.5 flash,2026-04-01,0.3,2.5,google
+gemini 2.5 flash,2026-04-01,0.54,4.5,google
+gemini 2.5 flash,2026-04-01,0.15,1.25,google
+gemini 2.5 flash,2026-04-01,0.15,,google
+gemini 2.5 flash ga,2025-07-05,0.3,2.5,google
+gemini 2.5 flash ga,2025-07-05,0.15,0.6,google
+gemini 2.5 flash image,2026-04-01,0.3,2.5,google
+gemini 2.5 flash image,2026-04-01,0.15,1.25,google
+gemini 2.5 flash lite,2025-07-05,0.1,0.4,google
+gemini 2.5 flash lite,2025-10-02,0.1,0.4,google
+gemini 2.5 flash lite,2026-01-01,0.1,0.4,google
+gemini 2.5 flash lite,2026-04-01,0.1,0.4,google
+gemini 2.5 flash lite,2026-04-01,0.18,0.72,google
+gemini 2.5 flash lite,2026-04-01,0.05,0.2,google
+gemini 2.5 flash live api,2025-07-05,0.5,2.0,google
+gemini 2.5 flash live api,2025-10-02,0.5,2.0,google
+gemini 2.5 flash live api,2026-01-01,0.5,2.0,google
+gemini 2.5 flash live api,2026-04-01,0.5,2.0,google
+gemini 2.5 pro,2025-07-05,1.25,10.0,google
+gemini 2.5 pro,2025-10-02,1.25,10.0,google
+gemini 2.5 pro,2026-01-01,1.25,10.0,google
+gemini 2.5 pro,2026-04-01,1.25,10.0,google
+gemini 2.5 pro,2026-04-01,2.25,18.0,google
+gemini 2.5 pro,2026-04-01,0.625,5.0,google
+gemini 2.5 pro computer use-preview,2026-01-01,1.25,10.0,google
+gemini 2.5 pro computer use-preview,2026-04-01,1.25,10.0,google
+gemini 3 flash preview,2026-01-01,0.5,3.0,google
+gemini 3 flash preview,2026-04-01,0.5,3.0,google
+gemini 3 flash preview,2026-04-01,0.9,5.4,google
+gemini 3 flash preview,2026-04-01,0.25,1.5,google
+gemini 3 pro image preview,2026-04-01,2.0,12.0,google
+gemini 3 pro image preview,2026-04-01,1.0,6.0,google
+gemini 3 pro preview,2026-01-01,2.0,12.0,google
+gemini 3 pro preview,2026-04-01,2.0,12.0,google
+gemini 3 pro preview,2026-04-01,3.6,21.6,google
+gemini 3 pro preview,2026-04-01,1.0,6.0,google
+gemini 3.1 flash image preview,2026-04-01,0.5,3.0,google
+gemini 3.1 flash image preview,2026-04-01,0.25,1.5,google
+gemini 3.1 flash-lite preview,2026-04-01,0.25,1.5,google
+gemini 3.1 flash-lite preview,2026-04-01,0.45,2.7,google
+gemini 3.1 flash-lite preview,2026-04-01,0.13,0.75,google
+gemini 3.1 pro preview,2026-04-01,2.0,12.0,google
+gemini 3.1 pro preview,2026-04-01,3.6,21.6,google
+gemini 3.1 pro preview,2026-04-01,1.0,6.0,google
+ada,2021-11-20,0.8,0.8,openai
+ada,2022-01-11,0.4,1.6,openai
+ada,2022-04-05,0.4,8.0,openai
+ada,2022-07-03,0.4,8.0,openai
+ada,2022-10-01,0.4,8.0,openai
+ada,2023-01-03,0.4,4.0,openai
+ada,2023-02-27,0.4,1.6,openai
+ada,2023-04-01,0.4,1.6,openai
+ada,2023-07-05,0.1,4.0,openai
+ada,2023-10-03,0.1,0.1,openai
+ada,2024-01-01,0.1,0.1,openai
+ada,2024-10-01,0.05,0.1,openai
+ada,2025-01-09,0.05,0.1,openai
+babbage,2021-11-20,1.2,1.2,openai
+babbage,2022-01-11,0.6,2.4,openai
+babbage,2022-04-05,0.6,12.0,openai
+babbage,2022-07-03,0.6,12.0,openai
+babbage,2022-10-01,0.5,12.0,openai
+babbage,2023-01-03,0.5,5.0,openai
+babbage,2023-02-27,0.6,5.0,openai
+babbage,2023-04-01,0.5,2.4,openai
+babbage,2023-07-05,0.5,5.0,openai
+babbage,2023-10-03,0.4,1.6,openai
+babbage,2024-01-01,0.4,1.6,openai
+babbage,2024-10-01,0.4,1.6,openai
+babbage,2025-01-09,0.4,1.6,openai
+curie,2021-11-20,6.0,6.0,openai
+curie,2022-01-11,3.0,12.0,openai
+curie,2022-04-05,3.0,60.0,openai
+curie,2022-07-03,3.0,60.0,openai
+curie,2022-10-01,2.0,60.0,openai
+curie,2023-01-03,2.0,20.0,openai
+curie,2023-02-27,2.0,12.0,openai
+curie,2023-04-01,2.0,12.0,openai
+curie,2023-07-05,2.0,20.0,openai
+davinci,2021-11-20,60.0,60.0,openai
+davinci,2022-01-11,30.0,120.0,openai
+davinci,2022-04-05,30.0,120.0,openai
+davinci,2022-07-03,30.0,120.0,openai
+davinci,2022-10-01,20.0,200.0,openai
+davinci,2023-01-03,20.0,200.0,openai
+davinci,2023-02-27,20.0,120.0,openai
+davinci,2023-04-01,20.0,120.0,openai
+davinci,2023-07-05,1.5,200.0,openai
+davinci,2023-10-03,2.0,12.0,openai
+davinci,2024-01-01,2.0,12.0,openai
+davinci,2024-10-01,6.0,12.0,openai
+davinci,2025-01-09,6.0,12.0,openai
+gpt-3.5-turbo,2023-04-01,2.0,2.0,openai
+gpt-3.5-turbo,2024-01-01,1.0,8.0,openai
+gpt-3.5-turbo,2024-10-01,0.5,6.0,openai
+gpt-3.5-turbo,2025-01-09,0.5,6.0,openai
+gpt-3.5-turbo-16k,2024-10-01,3.0,4.0,openai
+gpt-3.5-turbo-16k,2025-01-09,3.0,4.0,openai
+gpt-4,2023-10-03,30.0,60.0,openai
+gpt-4,2024-01-01,10.0,60.0,openai
+gpt-4,2024-10-01,10.0,60.0,openai
+gpt-4,2025-01-09,10.0,60.0,openai
+gpt-4,2025-07-02,0.05,3.0,openai
+gpt-4,2025-10-04,0.05,3.0,openai
+gpt-4,2026-01-02,0.05,3.0,openai
+gpt-4-32k,2024-01-01,120.0,120.0,openai
+gpt-4-32k,2024-10-01,120.0,120.0,openai
+gpt-4-32k,2025-01-09,120.0,120.0,openai
+gpt-4-turbo,2024-10-01,10.0,30.0,openai
+gpt-4-turbo,2025-01-09,10.0,30.0,openai
+gpt-4o,2024-10-01,1.25,15.0,openai
+gpt-4o,2025-01-09,1.25,15.0,openai
+gpt-4o,2025-04-01,0.15,80.0,openai
+gpt-4o,2025-07-02,0.3,80.0,openai
+gpt-4o,2025-10-04,0.3,20.0,openai
+gpt-4o-mini,2024-10-01,0.075,1.2,openai
+gpt-4o-mini,2025-01-09,0.075,0.6,openai

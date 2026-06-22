@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>AI Model Development & Efficiency</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.30.0/plotly.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#eef1f6; --panel:#ffffff; --ink:#0f1729; --muted:#5b6577;
+  --accent:#1e40af; --accent2:#3b5bd6; --silver:#c7ccd6; --border:#dfe3ea; --grid:#eceef3; --chip:#eef2fb;
+  --good:#16a34a; --bad:#dc2626;
+}
+html[data-theme="dark"]{
+  --bg:#0b0f1a; --panel:#141b2c; --ink:#e9edf6; --muted:#9aa4ba;
+  --accent:#5b79ff; --accent2:#8aa0ff; --silver:#3a445c; --border:#243049; --grid:#1d2538; --chip:#1a2740;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2)}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:12px 18px;background:var(--panel);border-bottom:1px solid var(--border)}
+.brand{font-weight:800;letter-spacing:-.02em;font-size:1.02rem;display:flex;align-items:center;gap:9px;white-space:nowrap}
+.brand .dot{width:13px;height:13px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.nav{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav button{border:1px solid transparent;background:transparent;color:var(--muted);font-weight:600;font-family:inherit;
+  font-size:.86rem;padding:7px 13px;border-radius:9px;cursor:pointer;white-space:nowrap;transition:.15s}
+.nav button:hover{background:var(--chip);color:var(--ink)}
+.nav button.active{background:var(--accent);color:#fff}
+.toggle{margin-left:auto;border:1px solid var(--border);background:var(--bg);color:var(--ink);font-family:inherit;
+  font-weight:600;font-size:.8rem;padding:7px 12px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.wrap{max-width:1280px;margin:0 auto;padding:18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin-bottom:16px}
+.kpi{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:15px 17px}
+.kpi .l{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.kpi .v{font-size:1.75rem;font-weight:800;letter-spacing:-.03em;margin-top:3px;line-height:1.1}
+.kpi .s{font-size:.7rem;color:var(--muted);margin-top:3px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 4px;font-size:1rem;font-weight:700}
+.card .sub{color:var(--muted);font-size:.82rem;margin:0 0 12px}
+.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;margin-bottom:6px}
+.ctl{display:flex;flex-direction:column;gap:5px;font-size:.76rem;font-weight:600;color:var(--muted)}
+.ctl input[type=range]{accent-color:var(--accent);width:160px}
+.ctl select,.ctl .seg{font-family:inherit}
+.ctl select{border:1px solid var(--border);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 9px;font-size:.82rem;font-weight:500}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{border:none;background:var(--panel);color:var(--muted);font-weight:600;font-size:.8rem;padding:6px 11px;cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--border);background:var(--panel);color:var(--muted);font-size:.78rem;font-weight:600;
+  padding:5px 10px;border-radius:999px;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.val{color:var(--ink);font-weight:700}
+.plot{width:100%}
+details{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
+summary{cursor:pointer;font-weight:600;font-size:.85rem;color:var(--accent2)}
+details p{font-size:.84rem;color:var(--muted);line-height:1.6;margin:8px 0 0}
+details b{color:var(--ink)}
+.note{font-size:.8rem;color:var(--muted);background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:10px 13px;margin-bottom:14px}
+.hidden{display:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dl{display:inline-block;margin-top:10px;border:1px solid var(--border);background:var(--panel);color:var(--ink);
+  font-weight:600;font-size:.78rem;padding:6px 11px;border-radius:8px;cursor:pointer;text-decoration:none}
+.foot{color:var(--muted);font-size:.76rem;text-align:center;padding:18px}
+@media(max-width:760px){
+  .wrap{padding:12px}
+  .grid2{grid-template-columns:1fr}
+  .ctl input[type=range]{width:130px}
+  .kpi .v{font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><span class="dot"></span>AI Model Dev &amp; Efficiency</div>
+  <div class="nav" id="nav"></div>
+  <button class="toggle" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
+</div>
+
+<div class="wrap">
+  <div class="kpis" id="kpis"></div>
+
+  <!-- OVERVIEW -->
+  <section data-tab="overview">
+    <div class="grid2">
+      <div class="card"><h3>Model output by company</h3><p class="sub">Top 5 companies, models per year</p><div class="plot" id="ov_prod"></div></div>
+      <div class="card"><h3>Most efficient models</h3><p class="sub">Wh per 1,000 tokens (measured, open models)</p><div class="plot" id="ov_energy"></div></div>
+    </div>
+    <div class="note">⚠️ Independent research, not an official source. Figures are tagged <b>measured</b>, <b>vendor-reported</b>, or <b>estimated</b>. Closed-model energy is never measured directly. See <b>Sources</b> for full disclaimers.</div>
+  </section>
+
+  <!-- PRODUCTION -->
+  <section data-tab="production" class="hidden">
+    <div class="card">
+      <h3>Model production by company</h3><p class="sub">Who ships the most notable AI models, over time — all companies.</p>
+      <div class="controls">
+        <label class="ctl">From year <span class="val" id="pYrL">2018</span><input type="range" id="pYrFrom" min="2012" max="2026" value="2018"></label>
+        <label class="ctl">To year <span class="val" id="pYrR">2026</span><input type="range" id="pYrTo" min="2012" max="2026" value="2026"></label>
+        <label class="ctl">Top companies <span class="val" id="pTopV">6</span><input type="range" id="pTop" min="3" max="12" value="6"></label>
+        <span class="ctl">View<span class="seg" id="pMode"><button class="on" data-v="year">Per year</button><button data-v="cum">Cumulative</button></span></span>
+      </div>
+      <div class="plot" id="prod"></div>
+      <details><summary>About this chart — method, limitations & sources</summary>
+        <p><b>What.</b> Notable AI models released per company per year (or cumulatively), all companies. Orgs merged where they're the same company (Google+DeepMind, Meta+FAIR).</p>
+        <p><b>Why.</b> The most direct read on production volume — one half of "developing the most."</p>
+        <p><b>Limitations.</b> Counts quantity, not capability. The latest year is incomplete, so don't read its dip as a decline.</p>
+        <p><b>Source.</b> <a href="https://epoch.ai/data/ai-models">Epoch AI</a> (curated).</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section data-tab="pricing" class="hidden">
+    <div class="card">
+      <h3>Token price over time</h3><p class="sub">Historical list prices — OpenAI (2021→), Anthropic & Google (recent).</p>
+      <div class="controls">
+        <span class="ctl">Providers<span class="chips" id="prChips"></span></span>
+        <span class="ctl">Price<span class="seg" id="prSide"><button class="on" data-v="out">Output</button><button data-v="inp">Input</button></span></span>
+        <label class="ctl">Per<select id="prUnit"><option value="0.001">1,000 tokens</option><option value="0.01">10,000 tokens</option><option value="0.1">100,000 tokens</option><option value="1">1,000,000 tokens</option></select></label>
+      </div>
+      <div class="plot" id="price"></div>
+      <details><summary>About this chart — method, limitations & sources</summary>
+        <p><b>What.</b> Output/input token price over time, per chosen unit. Drag/click controls update instantly.</p>
+        <p><b>How.</b> Reconstructed from Wayback snapshots; OpenAI parsed from page text, Anthropic & Google from HTML tables. Normalized to USD per 1M tokens.</p>
+        <p><b>Limitations.</b> OpenAI has the fullest history; Anthropic is correct but mid-2025+ only (earlier pages archived empty); Google is recent, best-effort. List prices, not batch/negotiated.</p>
+        <p><b>Sources.</b> <a href="https://web.archive.org/">Internet Archive</a> · <a href="https://artificialanalysis.ai/">Artificial Analysis</a>.</p>
+      </details>
+    </div>
+    <div class="card">
+      <h3>Current price vs. intelligence — across companies</h3><p class="sub">Every current model with a price, colored by company. Cheaper + smarter = bottom-right is better value.</p>
+      <div class="plot" id="curr"></div>
+      <details><summary>About this chart — method & sources</summary>
+        <p><b>What.</b> Output price (per 1M tokens) vs. Artificial Analysis intelligence index, one point per current model, by company — covers far more companies than the historical scrape.</p>
+        <p><b>Source.</b> <a href="https://artificialanalysis.ai/">Artificial Analysis</a> (current snapshot; vendor-reported prices).</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ENERGY -->
+  <section data-tab="energy" class="hidden">
+    <div class="card">
+      <h3>Measured energy per N tokens</h3><p class="sub">Open-weight models across many makers (Qwen, Meta, Google, Microsoft…).</p>
+      <div class="note">⚠️ Measured for <b>open models only</b>. Closed models (GPT, Claude, Gemini) are never measured and are excluded.</div>
+      <div class="controls">
+        <label class="ctl">Energy per<select id="eUnit"><option value="1">1,000 tokens</option><option value="10">10,000 tokens</option><option value="100">100,000 tokens</option><option value="1000">1,000,000 tokens</option></select></label>
+        <label class="ctl">Show top <span class="val" id="eTopV">20</span><input type="range" id="eTop" min="5" max="40" value="20"></label>
+      </div>
+      <div class="plot" id="energy"></div>
+      <details><summary>About this chart — method, limitations & sources</summary>
+        <p><b>How.</b> ML.Energy GPU measurements (Zeus); median across tasks; Joules/token → Wh per 1k (÷3600 ×1000).</p>
+        <p><b>Limitations.</b> Open models only; depends on hardware/batch size (mixes H100/B200), so treat gaps under ~2× as noise.</p>
+        <p><b>Source.</b> <a href="https://ml.energy/leaderboard">ML.Energy</a> (measured).</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ECONOMY -->
+  <section data-tab="economy" class="hidden">
+    <div class="card">
+      <h3>Token price vs. inflation & electricity</h3><p class="sub">Does "credit price" track the economy — or is something else driving it?</p>
+      <div class="controls">
+        <label class="ctl">From year <span class="val" id="ecYrV">2020</span><input type="range" id="ecYr" min="2010" max="2025" value="2020"></label>
+        <span class="ctl">Overlay token price<span class="seg" id="ecOv"><button class="on" data-v="1">On</button><button data-v="0">Off</button></span></span>
+      </div>
+      <div class="plot" id="econ"></div>
+      <details><summary>About this chart — method, limitations & sources</summary>
+        <p><b>What.</b> CPI, energy CPI, and U.S. electricity price, optionally with the cheapest OpenAI token price.</p>
+        <p><b>Limitations.</b> <b>Correlation is not causation.</b> Dual axis — compare trends, not levels/crossings.</p>
+        <p><b>Sources.</b> <a href="https://fred.stlouisfed.org/">FRED</a> · <a href="https://www.eia.gov/opendata/">EIA</a> (official).</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section data-tab="sources" class="hidden">
+    <div class="card">
+      <h3>Sources & Methodology</h3>
+      <p class="sub">Where every figure comes from, and how to read it.</p>
+      <p style="font-size:.86rem;line-height:1.7"><b>Quality tags.</b> <b>Measured</b> = directly measured on known hardware. <b>Vendor-reported</b> = published by the developer (e.g. API prices). <b>Estimated</b> = inferred via a documented formula; shown as ranges, never single numbers.</p>
+      <div id="srcList"></div>
+      <details open><summary>Disclaimers</summary>
+        <p>1. Independent project, not official. 2. Estimates are ranges. 3. Correlation ≠ causation on the Economy tab. 4. The incomplete current year under-counts recent models. 5. Prices are list/API rates. 6. Energy depends on hardware/batch size and carries large variance. 7. Closed-model inference energy is never measured directly.</p>
+      </details>
+    </div>
+  </section>
+
+  <div class="foot">Independent research dashboard · data regenerable from the project repo · <span id="stamp"></span></div>
+</div>
+
+<script>
+const DATA = __DATA__;
+const PAL = ["#1e40af","#3b5bd6","#8aa0ff","#7c8aa6","#0ea5e9","#22c55e","#f59e0b","#a855f7","#ef4444","#14b8a6"];
+const TABS = [["overview","Overview"],["production","Model Production"],["pricing","Pricing"],["energy","Energy"],["economy","Economy"],["sources","Sources"]];
+let plots = {};
+
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function baseLayout(extra){
+  return Object.assign({
+    font:{family:"Inter,sans-serif",size:12,color:cssv('--ink')},
+    paper_bgcolor:"rgba(0,0,0,0)", plot_bgcolor:"rgba(0,0,0,0)",
+    margin:{l:48,r:14,t:10,b:38}, colorway:PAL,
+    xaxis:{gridcolor:cssv('--grid'),zeroline:false,linecolor:cssv('--border')},
+    yaxis:{gridcolor:cssv('--grid'),zeroline:false,linecolor:cssv('--border')},
+    legend:{orientation:"h",y:1.08,x:0,font:{size:11}},
+    hovermode:"x unified", hoverlabel:{bgcolor:cssv('--panel'),font:{color:cssv('--ink')}}
+  }, extra||{});
+}
+const CFG={responsive:true,displayModeBar:false};
+function draw(id,traces,extra){ Plotly.react(id,traces,baseLayout(extra),CFG); plots[id]=true; }
+
+/* ---------- KPIs ---------- */
+function kpis(){
+  const m=DATA.meta;
+  const cards=[["Models tracked",m.models.toLocaleString(),"Epoch notable models"],
+    ["Most prolific",m.top_company,"by model count"],
+    ["Price points",m.price_points.toLocaleString(),"historical, over time"],
+    ["Companies priced",m.companies_priced,"current cross-company"],
+    ["Energy-measured",m.energy_models,"open models"]];
+  document.getElementById('kpis').innerHTML=cards.map(c=>
+    `<div class="kpi"><div class="l">${c[0]}</div><div class="v">${c[1]}</div><div class="s">${c[2]}</div></div>`).join('');
+}
+
+/* ---------- production ---------- */
+function topCompanies(n){
+  return DATA.companies.slice(0,n).map(c=>c.company);
+}
+function prodTraces(from,to,n,mode){
+  const comps=[]; const totals={};
+  DATA.production.forEach(r=>{ if(r.year>=from&&r.year<=to){ totals[r.company]=(totals[r.company]||0)+r.n; }});
+  const top=Object.entries(totals).sort((a,b)=>b[1]-a[1]).slice(0,n).map(x=>x[0]);
+  return top.map((co,i)=>{
+    const pts=[]; for(let y=from;y<=to;y++){ const row=DATA.production.find(r=>r.company===co&&r.year===y); pts.push([y,row?row.n:0]); }
+    if(mode==='cum'){ let s=0; pts.forEach(p=>{s+=p[1];p[1]=s;}); }
+    return {x:pts.map(p=>p[0]),y:pts.map(p=>p[1]),name:co,mode:'lines+markers',line:{width:2,color:PAL[i%PAL.length]}};
+  });
+}
+function renderProd(){
+  let from=+v('pYrFrom'),to=+v('pYrTo');
+  if(from>to){[from,to]=[to,from];}
+  const n=+v('pTop'),mode=seg('pMode');
+  document.getElementById('pYrL').textContent=from; document.getElementById('pYrR').textContent=to;
+  document.getElementById('pTopV').textContent=n;
+  draw('prod',prodTraces(from,to,n,mode),{yaxis:{title:'Models',gridcolor:cssv('--grid')}});
+}
+
+/* ---------- pricing ---------- */
+let prState={providers:null,side:'out',unit:0.001};
+function renderPrice(){
+  if(!DATA.pricing.length){document.getElementById('price').innerHTML='<p class="sub">No pricing data.</p>';return;}
+  const provs=prState.providers; const models={};
+  DATA.pricing.forEach(r=>{ if(!provs.includes(r.provider))return; const val=r[prState.side]; if(val==null)return;
+    (models[r.model]=models[r.model]||[]).push([r.date,val*prState.unit*1000]); });
+  const traces=Object.entries(models).map(([mdl,pts],i)=>{pts.sort((a,b)=>a[0]<b[0]?-1:1);
+    return {x:pts.map(p=>p[0]),y:pts.map(p=>p[1]),name:mdl,mode:'lines+markers',line:{width:2,color:PAL[i%PAL.length]}};});
+  const unitTxt=document.querySelector('#prUnit option:checked').textContent;
+  draw('price',traces,{yaxis:{title:'$ / '+unitTxt,gridcolor:cssv('--grid')},xaxis:{type:'date',gridcolor:cssv('--grid')}});
+}
+function renderCurrent(){
+  if(!DATA.current.length){document.getElementById('curr').innerHTML='<p class="sub">No data.</p>';return;}
+  const byCo={};
+  DATA.current.forEach(r=>{ if(r.intel==null||r.out==null)return; (byCo[r.company]=byCo[r.company]||[]).push(r);});
+  const top=Object.entries(byCo).sort((a,b)=>b[1].length-a[1].length).slice(0,9);
+  const traces=top.map(([co,rows],i)=>({x:rows.map(r=>r.out),y:rows.map(r=>r.intel),text:rows.map(r=>r.model),
+    name:co,mode:'markers',marker:{size:9,color:PAL[i%PAL.length],line:{width:.5,color:'#fff'}},
+    hovertemplate:'%{text}<br>$%{x}/1M · intel %{y}<extra>'+co+'</extra>'}));
+  Plotly.react('curr',traces,baseLayout({hovermode:'closest',
+    xaxis:{title:'Output $ / 1M tokens (log)',type:'log',gridcolor:cssv('--grid')},
+    yaxis:{title:'Intelligence index',gridcolor:cssv('--grid')}}),CFG);
+}
+
+/* ---------- energy ---------- */
+function renderEnergy(){
+  if(!DATA.energy.length){document.getElementById('energy').innerHTML='<p class="sub">No energy data — run fetch_mlenergy_energy.py.</p>';return;}
+  const unit=+v('eUnit'),n=+v('eTop'); document.getElementById('eTopV').textContent=n;
+  const e=[...DATA.energy].sort((a,b)=>a.wh-b.wh).slice(0,n);
+  const unitTxt=document.querySelector('#eUnit option:checked').textContent;
+  draw('energy',[{type:'bar',orientation:'h',y:e.map(r=>r.name),x:e.map(r=>r.wh*unit),
+    marker:{color:e.map(r=>r.params),colorscale:'Blues',colorbar:{title:'B params',thickness:10}},
+    hovertemplate:'%{y}<br>%{x:.3f} Wh<extra></extra>'}],
+    {margin:{l:160,r:14,t:10,b:38},height:28*e.length+90,hovermode:'closest',
+     xaxis:{title:'Wh per '+unitTxt,gridcolor:cssv('--grid')},yaxis:{automargin:true}});
+}
+
+/* ---------- economy ---------- */
+function renderEcon(){
+  const from=+v('ecYr'); document.getElementById('ecYrV').textContent=from; const ov=seg('ecOv')==='1';
+  const mac=(DATA.macro||[]).filter(r=>+r.date.slice(0,4)>=from);
+  const el=(DATA.elec||[]).filter(r=>+r.date.slice(0,4)>=from);
+  const traces=[
+    {x:mac.map(r=>r.date),y:mac.map(r=>r.cpi),name:'CPI (all items)',mode:'lines',line:{color:PAL[3]},yaxis:'y'},
+    {x:mac.map(r=>r.date),y:mac.map(r=>r.ecpi),name:'Energy CPI',mode:'lines',line:{color:PAL[6]},yaxis:'y'},
+    {x:el.map(r=>r.date),y:el.map(r=>r.price),name:'Electricity ¢/kWh',mode:'lines',line:{color:PAL[5],dash:'dot'},yaxis:'y2'}];
+  if(ov&&DATA.oai_price){const o=DATA.oai_price.filter(r=>+r.date.slice(0,4)>=from);
+    traces.push({x:o.map(r=>r.date),y:o.map(r=>r.price),name:'Cheapest OpenAI $/1M',mode:'lines+markers',line:{color:PAL[0],width:3},yaxis:'y2'});}
+  Plotly.react('econ',traces,baseLayout({xaxis:{type:'date',gridcolor:cssv('--grid')},
+    yaxis:{title:'Index (CPI)',gridcolor:cssv('--grid')},
+    yaxis2:{title:'¢/kWh & $/1M',overlaying:'y',side:'right',gridcolor:'rgba(0,0,0,0)'}}),CFG);
+}
+
+/* ---------- sources list ---------- */
+function sources(){
+  const S=[["Epoch AI","https://epoch.ai/data/ai-models","Model specs backbone — params, compute, training power, country, date.","Best-curated public DB; free; citable.","Closed-model params are estimates; 'notable' is a judgement."],
+   ["Artificial Analysis","https://artificialanalysis.ai/","Current pricing + intelligence indices, 500+ endpoints.","Current, independent, broad.","Snapshot only (no history)."],
+   ["Internet Archive","https://web.archive.org/","Historical pricing via archived pages.","Only way to recover past prices.","Many pages archived empty (JS shells); rate-limited."],
+   ["ML.Energy","https://ml.energy/leaderboard","Measured inference energy (open models).","Real GPU measurement.","Open models only; hardware-dependent; high variance."],
+   ["FRED","https://fred.stlouisfed.org/","Inflation & energy CPI.","Authoritative; long history.","Monthly; national aggregate."],
+   ["EIA","https://www.eia.gov/opendata/","U.S. electricity price.","Authoritative; granular.","U.S. only; needs aggregation."]];
+  document.getElementById('srcList').innerHTML=S.map(s=>
+    `<details><summary>${s[0]}</summary><p><a href="${s[1]}">${s[1]}</a><br><b>Use.</b> ${s[2]}<br><b>Pros.</b> ${s[3]}<br><b>Cons.</b> ${s[4]}</p></details>`).join('');
+}
+
+/* ---------- helpers / wiring ---------- */
+function v(id){return document.getElementById(id).value;}
+function seg(id){return document.querySelector('#'+id+' button.on').dataset.v;}
+function wireSeg(id,cb){document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cb();});}
+
+function buildNav(){
+  document.getElementById('nav').innerHTML=TABS.map((t,i)=>
+    `<button class="${i===0?'active':''}" data-t="${t[0]}" onclick="go('${t[0]}',this)">${t[1]}</button>`).join('');
+}
+function go(tab,btn){
+  document.querySelectorAll('section[data-tab]').forEach(s=>s.classList.toggle('hidden',s.dataset.tab!==tab));
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.remove('active')); btn&&btn.classList.add('active');
+  renderTab(tab);
+}
+function renderTab(tab){
+  if(tab==='overview'){draw('ov_prod',prodTraces(2018,2026,5,'year'),{height:300,yaxis:{title:'Models'}});
+     const e=[...DATA.energy].sort((a,b)=>a.wh-b.wh).slice(0,8);
+     draw('ov_energy',[{type:'bar',orientation:'h',y:e.map(r=>r.name),x:e.map(r=>r.wh),marker:{color:cssv('--accent')},hovertemplate:'%{y}<br>%{x:.3f} Wh<extra></extra>'}],{height:300,margin:{l:150,r:10,t:8,b:34},hovermode:'closest',yaxis:{automargin:true}});}
+  if(tab==='production')renderProd();
+  if(tab==='pricing'){renderPrice();renderCurrent();}
+  if(tab==='energy')renderEnergy();
+  if(tab==='economy')renderEcon();
+  window.dispatchEvent(new Event('resize'));
+}
+
+function toggleTheme(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('themeBtn').textContent=dark?'🌙 Dark':'☀️ Light';
+  try{localStorage.setItem('theme',dark?'light':'dark');}catch(e){}
+  const active=document.querySelector('#nav button.active'); if(active)renderTab(active.dataset.t);
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  try{const t=localStorage.getItem('theme'); if(t){document.documentElement.setAttribute('data-theme',t);
+    document.getElementById('themeBtn').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}}catch(e){}
+  buildNav(); kpis(); sources();
+  document.getElementById('stamp').textContent='built '+new Date().toISOString().slice(0,10);
+  // pricing provider chips
+  const provs=[...new Set(DATA.pricing.map(r=>r.provider))]; prState.providers=[...provs];
+  document.getElementById('prChips').innerHTML=provs.map(p=>`<span class="chip on" data-p="${p}">${p}</span>`).join('');
+  document.querySelectorAll('#prChips .chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');
+    prState.providers=[...document.querySelectorAll('#prChips .chip.on')].map(x=>x.dataset.p);renderPrice();});
+  // wiring (real-time: 'input')
+  ['pYrFrom','pYrTo','pTop'].forEach(id=>document.getElementById(id).addEventListener('input',()=>renderProd()));
+  wireSeg('pMode',renderProd);
+  wireSeg('prSide',()=>{prState.side=seg('prSide');renderPrice();});
+  document.getElementById('prUnit').addEventListener('change',()=>{prState.unit=+v('prUnit');renderPrice();});
+  document.getElementById('eUnit').addEventListener('change',()=>renderEnergy());
+  document.getElementById('eTop').addEventListener('input',()=>renderEnergy());
+  document.getElementById('ecYr').addEventListener('input',renderEcon);
+  wireSeg('ecOv',renderEcon);
+  renderTab('overview');
+});
+</script>
+</body>
+</html>
