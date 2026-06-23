@@ -9,7 +9,7 @@ pricing = load_pricing()
 if pricing is None:
     missing_data_notice("pricing_history.csv"); st.stop()
 
-# ---------------- controls ----------------
+# controls
 c1, c2, c3 = st.columns([1.2, 1, 1])
 with c1:
     providers = st.multiselect("Providers", sorted(pricing["provider"].unique()),

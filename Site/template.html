@@ -53,11 +53,15 @@ a{color:var(--accent2)}
   padding:5px 10px;border-radius:999px;cursor:pointer}
 .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .val{color:var(--ink);font-weight:700}
-.plot{width:100%}
+.plot{width:100%;min-height:300px}
 details{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
 summary{cursor:pointer;font-weight:600;font-size:.85rem;color:var(--accent2)}
 details p{font-size:.84rem;color:var(--muted);line-height:1.6;margin:8px 0 0}
 details b{color:var(--ink)}
+.notes p{font-size:.84rem;color:var(--muted);line-height:1.6;margin:8px 0 0}
+.notes p b{color:var(--ink)}
+.live{font-size:.82rem;color:var(--accent2);font-weight:600;margin-top:12px;line-height:1.5;padding:9px 12px;background:var(--chip);border-radius:9px}
+.live b{color:var(--ink)}
 .note{font-size:.8rem;color:var(--muted);background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:10px 13px;margin-bottom:14px}
 .hidden{display:none}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -102,12 +106,8 @@ details b{color:var(--ink)}
         <span class="ctl">View<span class="seg" id="pMode"><button class="on" data-v="year">Per year</button><button data-v="cum">Cumulative</button></span></span>
       </div>
       <div class="plot" id="prod"></div>
-      <details><summary>About this chart — method, limitations & sources</summary>
-        <p><b>What.</b> Notable AI models released per company per year (or cumulatively), all companies. Orgs merged where they're the same company (Google+DeepMind, Meta+FAIR).</p>
-        <p><b>Why.</b> The most direct read on production volume — one half of "developing the most."</p>
-        <p><b>Limitations.</b> Counts quantity, not capability. The latest year is incomplete, so don't read its dip as a decline.</p>
-        <p><b>Source.</b> <a href="https://epoch.ai/data/ai-models">Epoch AI</a> (curated).</p>
-      </details>
+      <div class="live" id="prodLive"></div>
+      <details><summary>About this chart — meaning, method, limitations &amp; sources</summary><div class="notes" id="prodNotes"></div></details>
     </div>
   </section>
 
@@ -118,23 +118,15 @@ details b{color:var(--ink)}
       <div class="controls">
         <span class="ctl">Providers<span class="chips" id="prChips"></span></span>
         <span class="ctl">Price<span class="seg" id="prSide"><button class="on" data-v="out">Output</button><button data-v="inp">Input</button></span></span>
-        <label class="ctl">Per<select id="prUnit"><option value="0.001">1,000 tokens</option><option value="0.01">10,000 tokens</option><option value="0.1">100,000 tokens</option><option value="1">1,000,000 tokens</option></select></label>
       </div>
       <div class="plot" id="price"></div>
-      <details><summary>About this chart — method, limitations & sources</summary>
-        <p><b>What.</b> Output/input token price over time, per chosen unit. Drag/click controls update instantly.</p>
-        <p><b>How.</b> Reconstructed from Wayback snapshots; OpenAI parsed from page text, Anthropic & Google from HTML tables. Normalized to USD per 1M tokens.</p>
-        <p><b>Limitations.</b> OpenAI has the fullest history; Anthropic is correct but mid-2025+ only (earlier pages archived empty); Google is recent, best-effort. List prices, not batch/negotiated.</p>
-        <p><b>Sources.</b> <a href="https://web.archive.org/">Internet Archive</a> · <a href="https://artificialanalysis.ai/">Artificial Analysis</a>.</p>
-      </details>
+      <div class="live" id="priceLive"></div>
+      <details><summary>About this chart — meaning, method, limitations &amp; sources</summary><div class="notes" id="priceNotes"></div></details>
     </div>
     <div class="card">
       <h3>Current price vs. intelligence — across companies</h3><p class="sub">Every current model with a price, colored by company. Cheaper + smarter = bottom-right is better value.</p>
       <div class="plot" id="curr"></div>
-      <details><summary>About this chart — method & sources</summary>
-        <p><b>What.</b> Output price (per 1M tokens) vs. Artificial Analysis intelligence index, one point per current model, by company — covers far more companies than the historical scrape.</p>
-        <p><b>Source.</b> <a href="https://artificialanalysis.ai/">Artificial Analysis</a> (current snapshot; vendor-reported prices).</p>
-      </details>
+      <details><summary>About this chart — meaning, method, limitations &amp; sources</summary><div class="notes" id="currNotes"></div></details>
     </div>
   </section>
 
@@ -148,11 +140,8 @@ details b{color:var(--ink)}
         <label class="ctl">Show top <span class="val" id="eTopV">20</span><input type="range" id="eTop" min="5" max="40" value="20"></label>
       </div>
       <div class="plot" id="energy"></div>
-      <details><summary>About this chart — method, limitations & sources</summary>
-        <p><b>How.</b> ML.Energy GPU measurements (Zeus); median across tasks; Joules/token → Wh per 1k (÷3600 ×1000).</p>
-        <p><b>Limitations.</b> Open models only; depends on hardware/batch size (mixes H100/B200), so treat gaps under ~2× as noise.</p>
-        <p><b>Source.</b> <a href="https://ml.energy/leaderboard">ML.Energy</a> (measured).</p>
-      </details>
+      <div class="live" id="energyLive"></div>
+      <details><summary>About this chart — meaning, method, limitations &amp; sources</summary><div class="notes" id="energyNotes"></div></details>
     </div>
   </section>
 
@@ -162,14 +151,11 @@ details b{color:var(--ink)}
       <h3>Token price vs. inflation & electricity</h3><p class="sub">Does "credit price" track the economy — or is something else driving it?</p>
       <div class="controls">
         <label class="ctl">From year <span class="val" id="ecYrV">2020</span><input type="range" id="ecYr" min="2010" max="2025" value="2020"></label>
-        <span class="ctl">Overlay token price<span class="seg" id="ecOv"><button class="on" data-v="1">On</button><button data-v="0">Off</button></span></span>
+        <label class="ctl">Overlay token price<select id="ecModel"><option value="">None</option><option value="openai" selected>OpenAI</option><option value="anthropic">Anthropic</option><option value="google">Google</option></select></label>
       </div>
       <div class="plot" id="econ"></div>
-      <details><summary>About this chart — method, limitations & sources</summary>
-        <p><b>What.</b> CPI, energy CPI, and U.S. electricity price, optionally with the cheapest OpenAI token price.</p>
-        <p><b>Limitations.</b> <b>Correlation is not causation.</b> Dual axis — compare trends, not levels/crossings.</p>
-        <p><b>Sources.</b> <a href="https://fred.stlouisfed.org/">FRED</a> · <a href="https://www.eia.gov/opendata/">EIA</a> (official).</p>
-      </details>
+      <div class="live" id="econLive"></div>
+      <details><summary>About this chart — meaning, method, limitations &amp; sources</summary><div class="notes" id="econNotes"></div></details>
     </div>
   </section>
 
@@ -198,17 +184,25 @@ let plots = {};
 function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
 function baseLayout(extra){
   return Object.assign({
+    height:440,
     font:{family:"Inter,sans-serif",size:12,color:cssv('--ink')},
     paper_bgcolor:"rgba(0,0,0,0)", plot_bgcolor:"rgba(0,0,0,0)",
-    margin:{l:48,r:14,t:10,b:38}, colorway:PAL,
+    margin:{l:48,r:14,t:52,b:40}, colorway:PAL,
     xaxis:{gridcolor:cssv('--grid'),zeroline:false,linecolor:cssv('--border')},
     yaxis:{gridcolor:cssv('--grid'),zeroline:false,linecolor:cssv('--border')},
-    legend:{orientation:"h",y:1.08,x:0,font:{size:11}},
+    legend:{orientation:"h",y:1.0,yanchor:"bottom",x:0,font:{size:11}},
     hovermode:"x unified", hoverlabel:{bgcolor:cssv('--panel'),font:{color:cssv('--ink')}}
   }, extra||{});
 }
 const CFG={responsive:true,displayModeBar:false};
 function draw(id,traces,extra){ Plotly.react(id,traces,baseLayout(extra),CFG); plots[id]=true; }
+
+/* live "what you're looking at now" banner + full notes that both reflect current state */
+function setLive(id,t){const e=document.getElementById(id);if(e)e.innerHTML='▸ '+t;}
+function setNotes(id,parts){const e=document.getElementById(id);if(e)e.innerHTML=parts.map(p=>`<p><b>${p[0]}</b> ${p[1]}</p>`).join('');}
+function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+const PNAME={openai:'OpenAI',anthropic:'Anthropic',google:'Google'};
+function pn(p){return PNAME[p]||cap(p);}
 
 /* ---------- KPIs ---------- */
 function kpis(){
@@ -243,19 +237,41 @@ function renderProd(){
   document.getElementById('pYrL').textContent=from; document.getElementById('pYrR').textContent=to;
   document.getElementById('pTopV').textContent=n;
   draw('prod',prodTraces(from,to,n,mode),{yaxis:{title:'Models',gridcolor:cssv('--grid')}});
+  const tot={}; DATA.production.forEach(r=>{if(r.year>=from&&r.year<=to)tot[r.company]=(tot[r.company]||0)+r.n;});
+  const lead=Object.entries(tot).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+  const modeTxt=mode==='cum'?'cumulative (running total)':'per-year';
+  const inc=to>=2026?` <b>Note:</b> ${to} is still incomplete, so its dip is a data artifact, not a real decline.`:'';
+  setLive('prodLive',`Showing the <b>top ${n} companies</b> by model count, <b>${from}–${to}</b>, <b>${modeTxt}</b> view. Leaders in range: <b>${lead.join(', ')}</b>.`);
+  setNotes('prodNotes',[
+    ['What it shows.','How many notable AI models each company released, by year. Organizations that are really the same company are merged (Google + DeepMind + Brain; Meta + FAIR).'],
+    ['Reading the trend.',`A rising line means a company is shipping more each year. In ${modeTxt} view, ${mode==='cum'?'a steeper slope means faster recent output and the highest line has shipped the most overall in range':'peaks mark unusually active years'}.${inc}`],
+    ['Why it looks like this.','OpenAI\'s line climbs steeply from ~2023 as it accelerated releases; Google leads cumulatively from its long head start. Smaller labs (Anthropic, Alibaba) appear only once they crossed Epoch\'s notability bar.'],
+    ['How it was built.','Counts from the Epoch AI notable-models database, grouped by developer and release year, filtered to your year range. Companies merged for fairness.'],
+    ['Limitations & disclaimers.','This counts <b>quantity, not capability</b> — many small models ≠ one frontier model. Inclusion depends on Epoch\'s "notable" criteria. The most recent year under-counts because it\'s incomplete.'],
+    ['Source.','<a href="https://epoch.ai/data/ai-models">Epoch AI</a> (curated, measured).']
+  ]);
 }
 
 /* ---------- pricing ---------- */
-let prState={providers:null,side:'out',unit:0.001};
+let prState={providers:null,side:'out',unit:1};
 function renderPrice(){
   if(!DATA.pricing.length){document.getElementById('price').innerHTML='<p class="sub">No pricing data.</p>';return;}
   const provs=prState.providers; const models={};
   DATA.pricing.forEach(r=>{ if(!provs.includes(r.provider))return; const val=r[prState.side]; if(val==null)return;
-    (models[r.model]=models[r.model]||[]).push([r.date,val*prState.unit*1000]); });
+    (models[r.model]=models[r.model]||[]).push([r.date,val*prState.unit]); });
   const traces=Object.entries(models).map(([mdl,pts],i)=>{pts.sort((a,b)=>a[0]<b[0]?-1:1);
     return {x:pts.map(p=>p[0]),y:pts.map(p=>p[1]),name:mdl,mode:'lines+markers',line:{width:2,color:PAL[i%PAL.length]}};});
-  const unitTxt=document.querySelector('#prUnit option:checked').textContent;
-  draw('price',traces,{yaxis:{title:'$ / '+unitTxt,gridcolor:cssv('--grid')},xaxis:{type:'date',gridcolor:cssv('--grid')}});
+  draw('price',traces,{yaxis:{title:'USD per 1M tokens',gridcolor:cssv('--grid')},xaxis:{type:'date',gridcolor:cssv('--grid')}});
+  const sideTxt=prState.side==='out'?'output':'input';
+  const provTxt=(prState.providers&&prState.providers.length)?prState.providers.map(pn).join(', '):'none selected';
+  setLive('priceLive',`<b>${cap(sideTxt)}</b> price (USD per 1M tokens), providers: <b>${provTxt}</b>. ${Object.keys(models).length} model lines shown.`);
+  setNotes('priceNotes',[
+    ['What it shows.','The published API list price of each model over time. Each line is one model; a falling line means it got cheaper to use.'],
+    ['Reading the trend.','Sharp drops usually follow a new model launch or a competitor\'s price cut. Across the industry the trend is steeply downward — the same capability costs a fraction of what it did a couple of years ago.'],
+    ['How it was built.','Reconstructed from archived pricing pages (Wayback Machine). OpenAI parsed from page text; Anthropic & Google parsed structurally from HTML tables. All normalized to USD per 1,000,000 tokens, then rescaled to your unit.'],
+    ['Limitations & disclaimers.','<b>OpenAI</b> has the fullest history (2021→). <b>Anthropic</b> is accurate but only mid-2025 onward — earlier pages archived as empty shells. <b>Google</b> is recent and best-effort. These are list prices, not batch, cached, or negotiated rates.'],
+    ['Sources.','<a href="https://web.archive.org/">Internet Archive</a> · <a href="https://artificialanalysis.ai/">Artificial Analysis</a> (vendor-reported).']
+  ]);
 }
 function renderCurrent(){
   if(!DATA.current.length){document.getElementById('curr').innerHTML='<p class="sub">No data.</p>';return;}
@@ -268,6 +284,14 @@ function renderCurrent(){
   Plotly.react('curr',traces,baseLayout({hovermode:'closest',
     xaxis:{title:'Output $ / 1M tokens (log)',type:'log',gridcolor:cssv('--grid')},
     yaxis:{title:'Intelligence index',gridcolor:cssv('--grid')}}),CFG);
+  setNotes('currNotes',[
+    ['What it shows.',`Every current model with a public price: its output price (per 1M tokens, log scale) vs. its Artificial Analysis intelligence score. One dot per model, colored by company — ${DATA.current.length} models across ${new Set(DATA.current.map(r=>r.company)).size} companies.`],
+    ['Reading it.','<b>Bottom-right = cheap and smart = best value.</b> Top-left = expensive and weaker. The whole industry is drifting down-and-right over time as models get cheaper and better.'],
+    ['Why the log scale.','Prices span from a few cents to tens of dollars per million tokens. A log x-axis stops the cheap models from bunching against the left edge.'],
+    ['How it was built.','A current snapshot from Artificial Analysis — covers far more companies than the historical price scrape, which only has OpenAI/Anthropic/Google.'],
+    ['Limitations & disclaimers.','A snapshot of today, not a time series. The intelligence index is Artificial Analysis\'s own composite benchmark, so it reflects their methodology.'],
+    ['Source.','<a href="https://artificialanalysis.ai/">Artificial Analysis</a> (vendor-reported prices).']
+  ]);
 }
 
 /* ---------- energy ---------- */
@@ -281,22 +305,45 @@ function renderEnergy(){
     hovertemplate:'%{y}<br>%{x:.3f} Wh<extra></extra>'}],
     {margin:{l:160,r:14,t:10,b:38},height:28*e.length+90,hovermode:'closest',
      xaxis:{title:'Wh per '+unitTxt,gridcolor:cssv('--grid')},yaxis:{automargin:true}});
+  setLive('energyLive',`The <b>${n} most efficient</b> measured models, energy per <b>${unitTxt}</b>. Most efficient here: <b>${e[0]?e[0].name:'—'}</b> at ${e[0]?(e[0].wh*unit).toFixed(3):'—'} Wh.`);
+  setNotes('energyNotes',[
+    ['What it shows.','Watt-hours of GPU energy to generate your chosen number of tokens, per model — sorted most-efficient first. Shorter bar = more efficient. Color shows model size in billions of parameters.'],
+    ['Reading the trend.','Bigger models usually use more energy — but not always. Mixture-of-Experts models activate only part of their weights per token, so a large MoE model can beat a smaller dense one. That\'s why the colors don\'t line up perfectly with bar length.'],
+    ['About the "per" control.','Switching the token unit only rescales the axis; the ranking and relative bars are unchanged.'],
+    ['How it was built.','Measured by the ML.Energy benchmark using the Zeus power-measurement library. Each model\'s figure is the median across its measured tasks; energy-per-token (Joules) is converted to watt-hours per 1,000 tokens (÷3600 ×1000).'],
+    ['Limitations & disclaimers.','<b>Open-weight models only</b> — GPT, Claude, and Gemini are never measured and are excluded. Energy depends heavily on GPU and batch size; figures mix H100/B200, so treat differences under ~2× as noise. The median hides large per-run variance.'],
+    ['Source.','<a href="https://ml.energy/leaderboard">ML.Energy</a> (measured).']
+  ]);
 }
 
 /* ---------- economy ---------- */
 function renderEcon(){
-  const from=+v('ecYr'); document.getElementById('ecYrV').textContent=from; const ov=seg('ecOv')==='1';
-  const mac=(DATA.macro||[]).filter(r=>+r.date.slice(0,4)>=from);
-  const el=(DATA.elec||[]).filter(r=>+r.date.slice(0,4)>=from);
+  const from=+v('ecYr'); document.getElementById('ecYrV').textContent=from;
+  const prov=document.getElementById('ecModel').value;
+  // Index each series to 100 at its first point in range -> all comparable on ONE axis.
+  // Filtering nulls also closes data holes (e.g. the missing Oct-2025 CPI point).
+  function idx(arr,yk){ const f=(arr||[]).filter(r=>r[yk]!=null && +r.date.slice(0,4)>=from);
+    if(!f.length) return {x:[],y:[]}; const base=f[0][yk];
+    return {x:f.map(r=>r.date), y:f.map(r=>r[yk]/base*100)}; }
+  const cpi=idx(DATA.macro,'cpi'), ecpi=idx(DATA.macro,'ecpi'), elc=idx(DATA.elec,'price');
   const traces=[
-    {x:mac.map(r=>r.date),y:mac.map(r=>r.cpi),name:'CPI (all items)',mode:'lines',line:{color:PAL[3]},yaxis:'y'},
-    {x:mac.map(r=>r.date),y:mac.map(r=>r.ecpi),name:'Energy CPI',mode:'lines',line:{color:PAL[6]},yaxis:'y'},
-    {x:el.map(r=>r.date),y:el.map(r=>r.price),name:'Electricity ¢/kWh',mode:'lines',line:{color:PAL[5],dash:'dot'},yaxis:'y2'}];
-  if(ov&&DATA.oai_price){const o=DATA.oai_price.filter(r=>+r.date.slice(0,4)>=from);
-    traces.push({x:o.map(r=>r.date),y:o.map(r=>r.price),name:'Cheapest OpenAI $/1M',mode:'lines+markers',line:{color:PAL[0],width:3},yaxis:'y2'});}
-  Plotly.react('econ',traces,baseLayout({xaxis:{type:'date',gridcolor:cssv('--grid')},
-    yaxis:{title:'Index (CPI)',gridcolor:cssv('--grid')},
-    yaxis2:{title:'¢/kWh & $/1M',overlaying:'y',side:'right',gridcolor:'rgba(0,0,0,0)'}}),CFG);
+    {x:cpi.x,y:cpi.y,name:'CPI (all items)',mode:'lines',line:{color:PAL[3]}},
+    {x:ecpi.x,y:ecpi.y,name:'Energy CPI',mode:'lines',line:{color:PAL[6]}},
+    {x:elc.x,y:elc.y,name:'Electricity price',mode:'lines',line:{color:PAL[5],dash:'dot'}}];
+  if(prov && DATA.provider_price && DATA.provider_price[prov]){
+    const pp=idx(DATA.provider_price[prov],'price');
+    traces.push({x:pp.x,y:pp.y,name:prov+' token price',mode:'lines+markers',line:{color:PAL[0],width:3}});}
+  draw('econ',traces,{xaxis:{type:'date',gridcolor:cssv('--grid')},
+    yaxis:{title:'Indexed to 100 at start',gridcolor:cssv('--grid')}});
+  setLive('econLive',`All series <b>indexed to 100</b> at <b>${from}</b>. Token-price overlay: <b>${prov?pn(prov):'none'}</b>. Lines above 100 grew since ${from}; below 100 shrank.`);
+  setNotes('econNotes',[
+    ['What it shows.','Inflation (CPI), energy CPI, and U.S. electricity price — optionally with a company\'s cheapest token price — each rebased so its first value in range = 100.'],
+    ['Reading the trend.',`If the token-price line dives toward 10–20 while CPI and electricity drift up to ~110–120, then token price is <b>not</b> being driven by inflation or energy cost — competition and efficiency gains are the likely cause. That contrast is the main takeaway.`],
+    ['Why "indexed to 100".','The series use totally different units (an index number, ¢/kWh, $/1M tokens). Rebasing each to 100 strips the units away so you compare their <b>shape of change</b> on one axis — and fixes the unreadable squashed-axis problem of mixing scales.'],
+    ['How it was built.','CPI and energy CPI from FRED; electricity from the EIA (sales-weighted national average); token price from the cleaned pricing history. Each point = value ÷ first-in-range value × 100. Missing months (e.g. Oct 2025) are filtered so the lines connect across the gap.'],
+    ['Limitations & disclaimers.','<b>Correlation is not causation.</b> Indexing shows <b>relative</b> change, not absolute levels — you can\'t read "14 ¢/kWh" off this chart. The series have different native frequencies (monthly vs. quarterly vs. per-release).'],
+    ['Sources.','<a href="https://fred.stlouisfed.org/">FRED</a> · <a href="https://www.eia.gov/opendata/">EIA</a> · <a href="https://web.archive.org/">Internet Archive</a> (prices).']
+  ]);
 }
 
 /* ---------- sources list ---------- */
@@ -359,11 +406,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   ['pYrFrom','pYrTo','pTop'].forEach(id=>document.getElementById(id).addEventListener('input',()=>renderProd()));
   wireSeg('pMode',renderProd);
   wireSeg('prSide',()=>{prState.side=seg('prSide');renderPrice();});
-  document.getElementById('prUnit').addEventListener('change',()=>{prState.unit=+v('prUnit');renderPrice();});
   document.getElementById('eUnit').addEventListener('change',()=>renderEnergy());
   document.getElementById('eTop').addEventListener('input',()=>renderEnergy());
   document.getElementById('ecYr').addEventListener('input',renderEcon);
-  wireSeg('ecOv',renderEcon);
+  document.getElementById('ecModel').addEventListener('change',renderEcon);
   renderTab('overview');
 });
 </script>

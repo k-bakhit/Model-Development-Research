@@ -16,7 +16,7 @@ st.warning(
     icon="⚠️",
 )
 
-# ---------------- controls ----------------
+# controls
 c1, c2 = st.columns([1, 1])
 with c1:
     unit = st.selectbox("Energy per", ["1,000 tokens", "10,000 tokens",

@@ -9,7 +9,7 @@ models = load_models()
 if models is None:
     missing_data_notice("master_models.csv"); st.stop()
 
-# ---------------- controls ----------------
+# controls
 c1, c2, c3 = st.columns([1, 1, 1])
 with c1:
     yr = st.slider("Year range", 2012, int(models["year"].max()), (2018, int(models["year"].max())))

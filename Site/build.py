@@ -93,12 +93,15 @@ def main():
         data["elec"] = el.rename(columns={"period": "date",
                                           "price_cents_per_kwh": "price"}).to_dict("records")
 
-    # cheapest OpenAI output price per date (economy overlay)
+    # cheapest output price per date, per provider (economy overlay — selectable)
+    data["provider_price"] = {}
     if data["pricing"]:
         p = pd.DataFrame(data["pricing"])
-        oai = p[p.provider == "openai"].dropna(subset=["out"])
-        data["oai_price"] = (oai.groupby("date")["out"].min().reset_index()
-                             .rename(columns={"out": "price"}).to_dict("records"))
+        for prov in sorted(p.provider.unique()):
+            s = p[p.provider == prov].dropna(subset=["out"])
+            if len(s):
+                data["provider_price"][prov] = (s.groupby("date")["out"].min().reset_index()
+                                                .rename(columns={"out": "price"}).to_dict("records"))
 
     # ---- headline numbers ----
     data["meta"] = {
