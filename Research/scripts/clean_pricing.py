@@ -38,7 +38,7 @@ def date_from_name(fn):
     return pd.to_datetime(m.group(1)[:8], format="%Y%m%d") if m else None
 
 
-# ---------------------------------------------------------------- OpenAI
+# OpenAI
 OAI_MODELS = ["gpt-4o-mini","gpt-4o","gpt-4-turbo","gpt-4-32k","gpt-4-vision","gpt-4",
               "gpt-3.5-turbo-16k","gpt-3.5-turbo","davinci","curie","babbage","ada"]
 
@@ -70,7 +70,7 @@ def clean_openai() -> pd.DataFrame:
     return out
 
 
-# ---------------------------------------------------------------- Anthropic (structural)
+# Anthropic (structural)
 def clean_anthropic() -> pd.DataFrame:
     rows = []
     files = glob.glob(f"{SNAP}/anthropic/*.html") + glob.glob(f"{SNAP}/anthropic_*.html")
@@ -93,13 +93,12 @@ def clean_anthropic() -> pd.DataFrame:
                              "input_price_per_1m":first_price(cells[in_col]),
                              "output_price_per_1m":first_price(cells[out_col])})
     df = pd.DataFrame(rows).dropna(subset=["input_price_per_1m"])
-    # collapse batch (half-price) duplicates -> keep standard = higher price
     return df.groupby(["provider","model","date"], as_index=False).agg(
         input_price_per_1m=("input_price_per_1m","max"),
         output_price_per_1m=("output_price_per_1m","max"))
 
 
-# ---------------------------------------------------------------- Google (structural, best-effort)
+# Google (structural, best-effort)
 def clean_google() -> pd.DataFrame:
     rows = []
     files = glob.glob(f"{SNAP}/google/google_vertex_*.html") + glob.glob(f"{SNAP}/google/google_gemini_docs_*.html")
@@ -110,7 +109,7 @@ def clean_google() -> pd.DataFrame:
             trs = t.find_all("tr")
             if not trs: continue
             head = " ".join(c.get_text(" ",strip=True).lower() for c in trs[0].find_all(["th","td"]))
-            if "token" not in head: continue                 # per-token tables only
+            if "token" not in head: continue                 
             current = None
             for tr in trs:
                 cells = [c.get_text(" ",strip=True) for c in tr.find_all(["th","td"])]

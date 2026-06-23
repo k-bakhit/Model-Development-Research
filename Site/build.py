@@ -3,8 +3,6 @@ build.py — generates the self-contained dashboard `index.html`.
 
 Reads the cleaned CSVs in ../Research/processed/, packs the bits each chart needs
 into a compact JSON, and injects it into template.html (replacing __DATA__).
-The result, index.html, is fully self-contained: open it by double-clicking, or
-host it anywhere static (GitHub Pages). No server, no Streamlit.
 
 Run:  python build.py
 """
@@ -29,7 +27,7 @@ def rd(name):
 def main():
     data = {}
 
-    # ---- model production (ALL companies) ----
+    # model production
     m = rd("master_models.csv")
     m["year"] = pd.to_datetime(m["release_date"], errors="coerce").dt.year
     m["company"] = m["developer"].replace(MERGE)
@@ -40,7 +38,7 @@ def main():
     data["companies"] = (prod["company"].value_counts().rename_axis("company")
                          .reset_index(name="total").to_dict("records"))
 
-    # ---- pricing history (OpenAI / Anthropic / Google) ----
+    # pricing history (OpenAI, Anthropic, and Google)
     pr = rd("pricing_history.csv")
     if not pr.empty:
         pr["date"] = pd.to_datetime(pr["date"], errors="coerce").dt.strftime("%Y-%m-%d")
@@ -49,7 +47,7 @@ def main():
     else:
         data["pricing"] = []
 
-    # ---- CURRENT pricing across MANY companies (from Artificial Analysis) ----
+    # CURRENT pricing across companies (from AA)
     current = []
     if AA.exists():
         for x in json.load(open(AA)).get("data", []):
@@ -65,7 +63,7 @@ def main():
                 })
     data["current"] = current
 
-    # ---- energy (many open-weight models / companies) ----
+    # energy (many open-weight models & companies)
     en = rd("mlenergy_energy_by_model.csv")
     if not en.empty:
         en = en.dropna(subset=["energy_wh_per_1k"])
@@ -77,7 +75,7 @@ def main():
     else:
         data["energy"] = []
 
-    # ---- macro + electricity ----
+    # macro & electricity
     mac = rd("macro.csv")
     if not mac.empty:
         mac["date"] = pd.to_datetime(mac["date"], errors="coerce")
@@ -93,7 +91,7 @@ def main():
         data["elec"] = el.rename(columns={"period": "date",
                                           "price_cents_per_kwh": "price"}).to_dict("records")
 
-    # cheapest output price per date, per provider (economy overlay — selectable)
+    # cheapest output price per date & per provider
     data["provider_price"] = {}
     if data["pricing"]:
         p = pd.DataFrame(data["pricing"])
@@ -103,7 +101,7 @@ def main():
                 data["provider_price"][prov] = (s.groupby("date")["out"].min().reset_index()
                                                 .rename(columns={"out": "price"}).to_dict("records"))
 
-    # ---- headline numbers ----
+    # headline
     data["meta"] = {
         "models": int(len(m)),
         "top_company": (data["companies"][0]["company"] if data["companies"] else "—"),
@@ -112,11 +110,11 @@ def main():
         "companies_priced": int(len({c["company"] for c in current})),
     }
 
-    # ---- inject into template ----
+    # inject into template 
     tpl = (ROOT / "template.html").read_text(encoding="utf-8")
     out = tpl.replace("__DATA__", json.dumps(data, separators=(",", ":")))
-    (ROOT / "index.html").write_text(out, encoding="utf-8")
-    print(f"Wrote index.html  ({len(out)//1024} KB)")
+    (ROOT / "dashboard.html").write_text(out, encoding="utf-8")
+    print(f"Wrote dashboard.html  ({len(out)//1024} KB)")
     print(f"  production rows: {len(data['production'])}, current-priced companies: {data['meta']['companies_priced']}, "
           f"energy models: {len(data['energy'])}")
 

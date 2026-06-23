@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(python build.py)",
-      "mcp__Claude_Preview__preview_start"
-    ]
-  }
-}

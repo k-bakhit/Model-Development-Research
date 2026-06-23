@@ -1,45 +1,62 @@
-# AI Model Dashboard — static site
+# Static site: landing deck + dashboard
 
-A self-contained, responsive dashboard (royal-blue/silver, light + dark mode, real-time
-controls). No server, no Streamlit. `index.html` is fully self-contained — the data is
-baked in.
+Two self-contained pages, no server and no Streamlit. Open either one in a browser and it
+works offline, on desktop or mobile. The design is a single dark theme (black with a lime
+accent), shared across both pages.
 
 ## Files
-- `template.html` — the app (HTML/CSS/JS). Edit this to change design or charts.
-- `build.py` — reads the cleaned CSVs in `../Research/processed/` + `artificial_analysis.json`,
-  packs them into JSON, and injects into the template to produce `index.html`.
-- `index.html` — the built, deployable site (generated; don't edit by hand).
+
+- `index.html` is the landing deck: a particle-hero presentation that introduces the project,
+  the data sources, and how it was built, then links into the dashboard. Hand-authored, so
+  edit it directly.
+- `dashboard.html` is the interactive chart app (six tabs, live readouts, full method notes
+  and disclaimers). It is **generated** by `build.py`, so do not edit it by hand.
+- `template.html` is the source for the dashboard. Edit this to change the charts or styling.
+- `build.py` reads the cleaned CSVs in `../Research/processed/` plus `artificial_analysis.json`,
+  packs the bits each chart needs into JSON, and injects them into `template.html` to produce
+  `dashboard.html`.
 
 ## See it now (no deploy)
-Just **double-click `index.html`** — it opens in your browser and works offline,
-on desktop or mobile. That's the real thing.
 
-## Rebuild after data changes
+Double-click `index.html`. It opens in your browser and runs offline. The dashboard charts
+load Plotly from a CDN, so they need a connection the first time; everything else is inline.
+
+## Rebuild after the data changes
+
 ```bash
 cd Site
-python build.py        # regenerates index.html from the latest CSVs
+python build.py        # regenerates dashboard.html from the latest CSVs
 ```
 
+The headline figures shown on the landing deck (models tracked, most prolific lab, measured
+models) are written into `index.html` by hand. If a rebuild moves them noticeably, update
+those numbers in the deck to match.
+
 ## Deploy free on GitHub Pages
+
 1. Commit and push the site:
    ```bash
-   git add Site && git commit -m "Add static dashboard site" && git push
+   git add Site && git commit -m "Add static site" && git push
    ```
-2. On GitHub: **Settings → Pages**.
-3. Under **Build and deployment → Source**, pick **Deploy from a branch**.
-4. Branch **main**, folder **/ (root)**, **Save**.
-5. Your site appears at `https://k-bakhit.github.io/Model-Development-Research/Site/index.html`
-   within a minute or two. (To get a cleaner root URL, move `index.html` to the repo root,
-   or set the Pages source to the `Site` folder if offered.)
+2. On GitHub, open **Settings, then Pages**.
+3. Under **Build and deployment, Source**, pick **Deploy from a branch**.
+4. Choose branch **main**, folder **/ (root)**, and **Save**.
+5. The site appears at `https://k-bakhit.github.io/Model-Development-Research/Site/`
+   within a minute or two, with `index.html` as the front page. For a cleaner root URL, move
+   the two HTML files to the repo root, or point the Pages source at the `Site` folder if the
+   option is offered.
 
-Every `git push` that changes `index.html` auto-updates the live site.
+Every push that changes these files updates the live site.
 
-### Alternative hosts (all free, drag-and-drop `index.html`)
-- **Netlify Drop** — netlify.com/drop
-- **Cloudflare Pages**
-- **Vercel** (static)
+### Other free hosts (drag and drop the `Site` folder)
+
+- Netlify Drop (netlify.com/drop)
+- Cloudflare Pages
+- Vercel (static)
 
 ## Notes
-- Responsive: works on phone, tablet, desktop (one column on narrow screens).
-- Light/dark choice is remembered in the browser (localStorage).
-- Charts are Plotly.js loaded from a CDN; everything else is inline.
+
+- Responsive: both pages collapse to one column on narrow screens.
+- The dashboard reads its tab from the URL, so `dashboard.html#energy` opens the Energy tab
+  directly. The landing deck uses that to deep-link.
+- Charts are Plotly.js from a CDN; everything else, including the particle animation, is inline.

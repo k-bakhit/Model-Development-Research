@@ -70,10 +70,10 @@ pricing, benchmarks, and measured energy joined together.
 
 - [x] Data pipeline: model specs, pricing, measured energy, electricity prices
 - [x] Join into a single analysis-ready table
-- [ ] Historical pricing (price over time)
-- [ ] Inflation/energy macro series (FRED)
+- [x] Historical pricing (price over time)
+- [x] Inflation/energy macro series (FRED)
+- [x] Dashboard (charts + web interface) — see `Site/` (open `Site/index.html`)
 - [ ] Closed-model energy estimates
-- [ ] Dashboard (charts + web interface)
 - [ ] Per-task token experiments
 
 ## A note on data integrity

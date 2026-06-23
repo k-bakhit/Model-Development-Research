@@ -36,28 +36,23 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-ROOT = Path(__file__).resolve().parent.parent              # .../Research
+ROOT = Path(__file__).resolve().parent.parent              
 SNAP_DIR = ROOT / "Model_Data" / "pricing_snapshots"
 OUT_CSV = ROOT / "Model_Data" / "pricing_history_extracted.csv"
 
-# Pages to reconstruct. Add/remove freely. Use the path the provider used at the time
-# (older OpenAI prices lived at /pricing, API prices later at /api/pricing).
+
 PAGES = {
-    # OpenAI — strong, server-rendered history all the way back to 2021. Keep.
+    # OpenAI
     "openai": "openai.com/pricing",
     "openai_api": "openai.com/api/pricing",
 
-    # Anthropic — the marketing page (anthropic.com/pricing) is mostly JS shells;
-    # only mid-2025+ snapshots render. The DOCS pages are more static HTML, so they
-    # are the best shot at recovering earlier Claude prices. Try several known paths
-    # (the docs URL has changed over time); empty ones are skipped harmlessly.
+    # Anthropic
     "anthropic": "anthropic.com/pricing",
     "anthropic_docs": "docs.anthropic.com/en/docs/about-claude/pricing",
     "anthropic_models": "docs.anthropic.com/en/docs/about-claude/models/overview",
     "anthropic_models_old": "docs.anthropic.com/claude/docs/models-overview",
 
-    # Google — the old ai.google.dev/pricing path went stale after early 2025
-    # (Google moved its pricing). Add the current Gemini + Vertex locations.
+    # Google
     "google": "ai.google.dev/pricing",
     "google_gemini_docs": "ai.google.dev/gemini-api/docs/pricing",
     "google_vertex": "cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -65,8 +60,8 @@ PAGES = {
 
 CDX = "http://web.archive.org/cdx/search/cdx"
 HEADERS = {"User-Agent": "Mozilla/5.0 (research; pricing-history)"}
-PAUSE = 2.0                                                 # be polite to the archive
-MAX_RETRIES = 5                                             # archive.org 503s a lot
+PAUSE = 2.0                                                 
+MAX_RETRIES = 5                                             
 
 
 def get_with_retry(url: str, params: dict | None = None) -> requests.Response:
@@ -76,14 +71,13 @@ def get_with_retry(url: str, params: dict | None = None) -> requests.Response:
         try:
             r = requests.get(url, params=params, headers=HEADERS, timeout=60)
         except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
-            # "connection refused" / timeout = archive.org throttled us. Back off harder.
-            wait = 15 * (attempt + 1)                       # 15s, 30s, 45s, ...
+            wait = 15 * (attempt + 1)                       
             print(f"    connection throttled ({type(e).__name__}); retrying in {wait}s "
                   f"[{attempt + 1}/{MAX_RETRIES}]")
             time.sleep(wait)
             continue
         if r.status_code in (503, 429, 502, 504):
-            wait = 5 * (attempt + 1)                        # 5s, 10s, 15s, ...
+            wait = 5 * (attempt + 1)                        
             print(f"    archive busy ({r.status_code}); retrying in {wait}s "
                   f"[{attempt + 1}/{MAX_RETRIES}]")
             time.sleep(wait)
@@ -101,13 +95,13 @@ def get_snapshots(page_url: str) -> list[tuple[str, str]]:
         "output": "json",
         "fl": "timestamp,original",
         "filter": "statuscode:200",
-        "collapse": "timestamp:6",     # 6 digits = YYYYMM -> ~monthly
+        "collapse": "timestamp:6",     
     }
     r = get_with_retry(CDX, params=params)
     rows = r.json()
     if not rows:
         return []
-    rows = rows[1:]                    # first row is the column header
+    rows = rows[1:]                    
     return [(ts, orig) for ts, orig in rows]
 
 
@@ -133,10 +127,9 @@ def fetch_snapshot(timestamp: str, original: str) -> str | None:
         return None
 
 
-# Matches "$1.50", "$0.03", optionally followed by a per-tokens unit hint nearby.
 PRICE_RE = re.compile(r"\$\s?\d+(?:\.\d+)?")
 UNIT_HINTS = ("1m", "1,000,000", "million", "1k", "1,000", "per token", "tokens",
-              "mtok", "/ mtok", "/mtok")          # Anthropic writes "$3 / MTok"
+              "mtok", "/ mtok", "/mtok")          
 
 
 def extract_prices(html: str) -> list[dict]:
@@ -167,8 +160,6 @@ def main() -> None:
 
         for ts, orig in snaps:
             snap_path = SNAP_DIR / f"{provider}_{ts}.html"
-            # Skip snapshots already downloaded so re-runs don't re-hammer the archive
-            # (and only fetch the providers that failed last time).
             if snap_path.exists():
                 html = snap_path.read_text(encoding="utf-8")
                 print(f"    skip {ts} (already saved)")
@@ -177,9 +168,8 @@ def main() -> None:
                 time.sleep(PAUSE)
                 if not html:
                     continue
-                snap_path.write_text(html, encoding="utf-8")  # source of truth
+                snap_path.write_text(html, encoding="utf-8")  
                 print(f"    saved {ts}  ({len(extract_prices(html))} price hits)")
-            # Best-effort parse (runs for both fresh and already-saved pages).
             for hit in extract_prices(html):
                 rows.append({
                     "provider": provider,

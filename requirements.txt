@@ -1,5 +1,2 @@
-# Root requirements — used by Streamlit Community Cloud to build the dashboard.
-streamlit>=1.33
+# Build the static dashboard data (Site/build.py)
 pandas>=2.0
-plotly>=5.20
-numpy>=1.24

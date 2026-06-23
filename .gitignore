@@ -22,3 +22,6 @@ env/
 # ---- Large / regenerable data outputs ----
 # artificial_analysis.json IS versioned (it's source data we want in the repo).
 *.zip
+
+# Local Claude/editor config (regenerates; not part of the project)
+.claude/
