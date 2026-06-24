@@ -196,6 +196,17 @@ summary{cursor:pointer;font-weight:500;font-size:.8rem;letter-spacing:.06em;text
       <div class="readout" id="energyLive"></div>
       <details><summary>About this chart: meaning, method, limitations, sources</summary><div class="notes" id="energyNotes"></div></details>
     </div>
+    <div class="plate">
+      <div class="eyebrow">Energy efficiency, estimated</div>
+      <h3>Estimated energy for closed models</h3><p class="sub">GPT, Gemini, Grok, PaLM and other proprietary models, which nobody measures directly.</p>
+      <div class="callout"><span class="tag">Estimated</span><p>These are <b>estimates, not measurements</b>, shown as a range. They apply a physics formula calibrated on open models to each model's <b>total</b> parameter count. For sparse Mixture-of-Experts models (modern GPT, Gemini, Grok) that overestimates real energy, so read them as <b>rough upper bounds</b>.</p></div>
+      <div class="controls">
+        <label class="ctl">Show top <span class="val" id="estTopV">15</span><input type="range" id="estTop" min="5" max="40" value="15"></label>
+      </div>
+      <div class="plot" id="estplot"></div>
+      <div class="readout" id="estLive"></div>
+      <details><summary>About this chart: meaning, method, limitations, sources</summary><div class="notes" id="estNotes"></div></details>
+    </div>
   </section>
 
   <!-- ECONOMY -->
@@ -371,6 +382,30 @@ function renderEnergy(){
   ]);
 }
 
+function renderEstimated(){
+  const box=document.getElementById('estplot'); if(!box) return;
+  if(!DATA.estimated || !DATA.estimated.length){box.innerHTML='<p class="sub">No estimates. Run estimate_closed_energy.py.</p>';return;}
+  const n=+v('estTop'); document.getElementById('estTopV').textContent=n;
+  const e=[...DATA.estimated].sort((a,b)=>a.best-b.best).slice(0,n);
+  const col=cssv('--estimated');
+  Plotly.react('estplot',[{type:'bar',orientation:'h',y:e.map(r=>r.name),x:e.map(r=>r.best),
+    error_x:{type:'data',symmetric:false,array:e.map(r=>r.hi-r.best),arrayminus:e.map(r=>r.best-r.lo),color:col,thickness:1.2,width:3},
+    marker:{color:col,opacity:.5,line:{color:col,width:1}},
+    customdata:e.map(r=>r.lo.toFixed(3)+' to '+r.hi.toFixed(3)),
+    hovertemplate:'%{y}<br>best %{x:.3f} Wh (range %{customdata})<extra>estimated</extra>'}],
+    baseLayout({height:28*e.length+110,margin:{l:175,r:16,t:10,b:42},hovermode:'closest',
+      xaxis:{title:'Wh per 1,000 tokens (log scale, estimated upper bound)',type:'log',gridcolor:cssv('--grid')},
+      yaxis:{automargin:true}}),CFG);
+  setLive('estLive',`<b>${n}</b> closed models, estimated energy per 1,000 tokens with a low-to-high range. Upper-bound estimates, not measurements.`);
+  setNotes('estNotes',[
+    ['What it shows.','Estimated GPU energy per 1,000 tokens for proprietary models, drawn as bars with a low-to-high range (the whiskers).'],
+    ['Why a range.','Closed-model energy can only be inferred. The range is how far the calibration formula misses on the open models it was built from (10th to 90th percentile), which is a lower bound on the true uncertainty.'],
+    ['How it was built.','energy is about k times parameters, with k = 0.0054 Wh per 1,000 tokens per billion parameters, calibrated on measured open models (chat, H100). Range times 0.42 to times 3.58.'],
+    ['Limitations and disclaimers.','<b>Estimates, never measurements.</b> They use <b>total</b> parameters because closed active counts are not public, so Mixture-of-Experts models (GPT, Gemini, Grok) are <b>overestimated</b>. Read as rough upper bounds. The axis is log because values span orders of magnitude.'],
+    ['Source.','Method calibrated on <a href="https://ml.energy/leaderboard">ML.Energy</a>; parameter counts from <a href="https://epoch.ai/data/ai-models">Epoch AI</a>.']
+  ]);
+}
+
 /* ---------- economy ---------- */
 function renderEcon(){
   const from=+v('ecYr'); document.getElementById('ecYrV').textContent=from;
@@ -434,7 +469,7 @@ function renderTab(tab){
      draw('ov_energy',[{type:'bar',orientation:'h',y:e.map(r=>r.name),x:e.map(r=>r.wh),marker:{color:cssv('--accent')},hovertemplate:'%{y}<br>%{x:.3f} Wh<extra></extra>'}],{height:300,margin:{l:150,r:10,t:8,b:34},hovermode:'closest',yaxis:{automargin:true}});}
   if(tab==='production')renderProd();
   if(tab==='pricing'){renderPrice();renderCurrent();}
-  if(tab==='energy')renderEnergy();
+  if(tab==='energy'){renderEnergy();renderEstimated();}
   if(tab==='economy')renderEcon();
   window.dispatchEvent(new Event('resize'));
 }
@@ -458,6 +493,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   wireSeg('pMode',renderProd);
   wireSeg('prSide',()=>{prState.side=seg('prSide');renderPrice();});
   document.getElementById('eTop').addEventListener('input',()=>renderEnergy());
+  document.getElementById('estTop').addEventListener('input',()=>renderEstimated());
   document.getElementById('ecYr').addEventListener('input',renderEcon);
   document.getElementById('ecModel').addEventListener('change',renderEcon);
   go_hash();

@@ -73,7 +73,7 @@ pricing, benchmarks, and measured energy joined together.
 - [x] Historical pricing (price over time)
 - [x] Inflation/energy macro series (FRED)
 - [x] Dashboard (charts + web interface) — see `Site/` (open `Site/index.html`)
-- [ ] Closed-model energy estimates
+- [x] Closed-model energy estimates (range, shown on the Energy tab)
 - [ ] Per-task token experiments
 
 ## A note on data integrity

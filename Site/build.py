@@ -75,6 +75,17 @@ def main():
     else:
         data["energy"] = []
 
+    # estimated energy for closed models (GPT, Gemini, Grok, ...) — range, not point
+    est = rd("closed_model_energy_estimates.csv")
+    if not est.empty:
+        data["estimated"] = est.rename(columns={
+            "model_name": "name", "developer": "dev",
+            "energy_best_wh_per_1k": "best", "energy_low_wh_per_1k": "lo",
+            "energy_high_wh_per_1k": "hi"})[
+            ["name", "dev", "best", "lo", "hi"]].to_dict("records")
+    else:
+        data["estimated"] = []
+
     # macro & electricity
     mac = rd("macro.csv")
     if not mac.empty:
